@@ -9,7 +9,7 @@ class WhenConcurrentTestCase_Swift: XCTestCase {
         var numbers = (0..<42).makeIterator()
         let squareNumbers = numbers.map { $0 * $0 }
 
-        let generator = AnyIterator<Guarantee<Int>> {
+        let generator = AnyIterator<Guarantee6<Int>> {
             guard let number = numbers.next() else {
                 return nil
             }

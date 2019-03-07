@@ -24,7 +24,7 @@ class StressTests: XCTestCase {
         var promise = DispatchQueue.global().async(.promise){ 0 }
         let N = 1000
         for x in 1..<N {
-            promise = promise.then { y -> Guarantee<Int> in
+            promise = promise.then { y -> Guarantee6<Int> in
                 values.append(y)
                 XCTAssertEqual(x - 1, y)
                 return DispatchQueue.global().async(.promise) { x }

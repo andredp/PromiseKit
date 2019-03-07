@@ -34,6 +34,6 @@ public func firstly<U: Thenable>(execute body: () throws -> U) -> Promise6<U.T> 
 }
 
 /// - See: firstly()
-public func firstly<T>(execute body: () -> Guarantee<T>) -> Guarantee<T> {
+public func firstly<T>(execute body: () -> Guarantee6<T>) -> Guarantee6<T> {
     return body()
 }

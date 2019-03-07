@@ -8,8 +8,8 @@ import Dispatch
 
 - Returns: A guarantee that resolves after the specified duration.
 */
-public func after(seconds: TimeInterval) -> Guarantee<Void> {
-    let (rg, seal) = Guarantee<Void>.pending()
+public func after(seconds: TimeInterval) -> Guarantee6<Void> {
+    let (rg, seal) = Guarantee6<Void>.pending()
     let when = DispatchTime.now() + seconds
 #if swift(>=4.0)
     q.asyncAfter(deadline: when) { seal(()) }
@@ -26,8 +26,8 @@ public func after(seconds: TimeInterval) -> Guarantee<Void> {
 
  - Returns: A guarantee that resolves after the specified duration.
 */
-public func after(_ interval: DispatchTimeInterval) -> Guarantee<Void> {
-    let (rg, seal) = Guarantee<Void>.pending()
+public func after(_ interval: DispatchTimeInterval) -> Guarantee6<Void> {
+    let (rg, seal) = Guarantee6<Void>.pending()
     let when = DispatchTime.now() + interval
 #if swift(>=4.0)
     q.asyncAfter(deadline: when) { seal(()) }

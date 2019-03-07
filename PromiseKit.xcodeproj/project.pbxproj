@@ -54,7 +54,7 @@
 		636A291A1F1C156B001229C2 /* Promise6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29191F1C156B001229C2 /* Promise6.swift */; };
 		636A291F1F1C16FF001229C2 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A291E1F1C16FF001229C2 /* Box.swift */; };
 		636A29211F1C1716001229C2 /* Thenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29201F1C1716001229C2 /* Thenable.swift */; };
-		636A29231F1C17A6001229C2 /* Guarantee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29221F1C17A6001229C2 /* Guarantee.swift */; };
+		636A29231F1C17A6001229C2 /* Guarantee6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29221F1C17A6001229C2 /* Guarantee6.swift */; };
 		636A29251F1C3089001229C2 /* race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29241F1C3089001229C2 /* race.swift */; };
 		636A29271F1C3927001229C2 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29261F1C3927001229C2 /* Resolver.swift */; };
 		639BF757203DF03100FA577B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BF755203DF02C00FA577B /* Utilities.swift */; };
@@ -194,7 +194,7 @@
 		636A29191F1C156B001229C2 /* Promise6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Promise6.swift; path = Sources/Promise6.swift; sourceTree = "<group>"; };
 		636A291E1F1C16FF001229C2 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Box.swift; path = Sources/Box.swift; sourceTree = "<group>"; };
 		636A29201F1C1716001229C2 /* Thenable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thenable.swift; path = Sources/Thenable.swift; sourceTree = "<group>"; };
-		636A29221F1C17A6001229C2 /* Guarantee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Guarantee.swift; path = Sources/Guarantee.swift; sourceTree = "<group>"; };
+		636A29221F1C17A6001229C2 /* Guarantee6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Guarantee6.swift; path = Sources/Guarantee6.swift; sourceTree = "<group>"; };
 		636A29241F1C3089001229C2 /* race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = race.swift; path = Sources/race.swift; sourceTree = "<group>"; };
 		636A29261F1C3927001229C2 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resolver.swift; path = Sources/Resolver.swift; sourceTree = "<group>"; };
 		639BF755203DF02C00FA577B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				636A29191F1C156B001229C2 /* Promise6.swift */,
-				636A29221F1C17A6001229C2 /* Guarantee.swift */,
+				636A29221F1C17A6001229C2 /* Guarantee6.swift */,
 				636A29201F1C1716001229C2 /* Thenable.swift */,
 				632FBBE21F33B273008F8FBB /* Catchable.swift */,
 				63B912AC1F1E663E00D49110 /* Features */,
@@ -757,7 +757,7 @@
 				63B0AC851D595E6300FA21D9 /* dispatch_promise.m in Sources */,
 				636A291F1F1C16FF001229C2 /* Box.swift in Sources */,
 				63B0AC821D595E6300FA21D9 /* AnyPromise.m in Sources */,
-				636A29231F1C17A6001229C2 /* Guarantee.swift in Sources */,
+				636A29231F1C17A6001229C2 /* Guarantee6.swift in Sources */,
 				636A291A1F1C156B001229C2 /* Promise6.swift in Sources */,
 				63B0AC8B1D595E6300FA21D9 /* join.m in Sources */,
 				63B0AC891D595E6300FA21D9 /* hang.m in Sources */,

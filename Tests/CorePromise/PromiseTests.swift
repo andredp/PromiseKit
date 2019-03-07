@@ -86,7 +86,7 @@ class PromiseTests: XCTestCase {
 #if swift(>=3.1)
     func testCanMakeVoidPromise() {
         _ = Promise6()
-        _ = Guarantee()
+        _ = Guarantee6()
     }
 #endif
 

@@ -144,7 +144,7 @@ class LoggingTests: XCTestCase {
                 logOutput = "cauterized"
             }
         }
-        let guaranteeResolve = Guarantee<String>.pending()
+        let guaranteeResolve = Guarantee6<String>.pending()
         let workQueue = DispatchQueue(label: "worker")
         workQueue.async {
             guaranteeResolve.resolve("GuaranteeFulfilled")
@@ -190,7 +190,7 @@ class LoggingTests: XCTestCase {
         }
         conf.logHandler = loggingClosure
         do {
-            let _ = Guarantee<Int>.pending()
+            let _ = Guarantee6<Int>.pending()
         }
         XCTAssertEqual ("pendingGuaranteeDeallocated", logOutput!)
     }

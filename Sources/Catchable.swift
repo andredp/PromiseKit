@@ -42,7 +42,7 @@ public extension CatchMixin {
 }
 
 public class PMKFinalizer {
-    let pending = Guarantee<Void>.pending()
+    let pending = Guarantee6<Void>.pending()
 
     /// `finally` is the same as `ensure`, but it is not chainable
     public func finally(on: DispatchQueue? = conf.Q.return, flags: DispatchWorkItemFlags? = nil, _ body: @escaping () -> Void) {
@@ -106,8 +106,8 @@ public extension CatchMixin {
      - SeeAlso: [Cancellation](https://github.com/mxcl/PromiseKit/blob/master/Documentation/CommonPatterns.md#cancellation)
      */
     @discardableResult
-    func recover(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(Error) -> Guarantee<T>) -> Guarantee<T> {
-        let rg = Guarantee<T>(.pending)
+    func recover(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(Error) -> Guarantee6<T>) -> Guarantee6<T> {
+        let rg = Guarantee6<T>(.pending)
         pipe {
             switch $0 {
             case .fulfilled(let value):
@@ -167,7 +167,7 @@ public extension CatchMixin {
      - Parameter body: The closure that executes when this promise resolves.
      - Returns: A new promise, resolved with this promise’s resolution.
      */
-    func ensureThen(on: DispatchQueue? = conf.Q.return, flags: DispatchWorkItemFlags? = nil, _ body: @escaping () -> Guarantee<Void>) -> Promise6<T> {
+    func ensureThen(on: DispatchQueue? = conf.Q.return, flags: DispatchWorkItemFlags? = nil, _ body: @escaping () -> Guarantee6<Void>) -> Promise6<T> {
         let rp = Promise6<T>(.pending)
         pipe { result in
             on.async(flags: flags) {
@@ -206,8 +206,8 @@ public extension CatchMixin where T == Void {
      - SeeAlso: [Cancellation](https://github.com/mxcl/PromiseKit/blob/master/Documentation/CommonPatterns.md#cancellation)
      */
     @discardableResult
-    func recover(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(Error) -> Void) -> Guarantee<Void> {
-        let rg = Guarantee<Void>(.pending)
+    func recover(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(Error) -> Void) -> Guarantee6<Void> {
+        let rg = Guarantee6<Void>(.pending)
         pipe {
             switch $0 {
             case .fulfilled:

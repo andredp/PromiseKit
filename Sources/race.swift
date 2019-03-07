@@ -48,8 +48,8 @@ public func race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
 
  - Returns: The guarantee that resolves first
 */
-public func race<T>(_ guarantees: Guarantee<T>...) -> Guarantee<T> {
-    let rg = Guarantee<T>(.pending)
+public func race<T>(_ guarantees: Guarantee6<T>...) -> Guarantee6<T> {
+    let rg = Guarantee6<T>(.pending)
     for guarantee in guarantees {
         guarantee.pipe(to: rg.box.seal)
     }

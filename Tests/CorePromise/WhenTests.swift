@@ -251,12 +251,12 @@ class WhenTests: XCTestCase {
 
     func testGuaranteeWhen() {
         let ex1 = expectation(description: "")
-        when(Guarantee(), Guarantee()).done {
+        when(Guarantee6(), Guarantee6()).done {
             ex1.fulfill()
         }
 
         let ex2 = expectation(description: "")
-        when(guarantees: [Guarantee(), Guarantee()]).done {
+        when(guarantees: [Guarantee6(), Guarantee6()]).done {
             ex2.fulfill()
         }
 

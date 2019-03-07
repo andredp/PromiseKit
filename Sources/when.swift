@@ -222,12 +222,12 @@ public func when<It: IteratorProtocol>(fulfilled promiseIterator: It, concurrent
  - Note: we do not provide tuple variants for `when(resolved:)` but will accept a pull-request
  - Remark: Doesn't take Thenable due to protocol `associatedtype` paradox
 */
-public func when<T>(resolved promises: Promise6<T>...) -> Guarantee<[Result<T>]> {
+public func when<T>(resolved promises: Promise6<T>...) -> Guarantee6<[Result<T>]> {
     return when(resolved: promises)
 }
 
 /// - See: `when(resolved: Promise<T>...)`
-public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee<[Result<T>]> {
+public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee6<[Result<T>]> {
     guard !promises.isEmpty else {
         return .value([])
     }
@@ -235,7 +235,7 @@ public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee<[Result<T>]> 
     var countdown = promises.count
     let barrier = DispatchQueue(label: "org.promisekit.barrier.join", attributes: .concurrent)
 
-    let rg = Guarantee<[Result<T>]>(.pending)
+    let rg = Guarantee6<[Result<T>]>(.pending)
     for promise in promises {
         promise.pipe { result in
             barrier.sync(flags: .barrier) {
@@ -252,11 +252,11 @@ public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee<[Result<T>]> 
 }
 
 /// Waits on all provided Guarantees.
-public func when(_ guarantees: Guarantee<Void>...) -> Guarantee<Void> {
+public func when(_ guarantees: Guarantee6<Void>...) -> Guarantee6<Void> {
     return when(guarantees: guarantees)
 }
 
 // Waits on all provided Guarantees.
-public func when(guarantees: [Guarantee<Void>]) -> Guarantee<Void> {
+public func when(guarantees: [Guarantee6<Void>]) -> Guarantee6<Void> {
     return when(fulfilled: guarantees).recover{ _ in }.asVoid()
 }
