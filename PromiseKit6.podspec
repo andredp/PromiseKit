@@ -2,8 +2,8 @@ Pod::Spec.new do |s|
   s.name = "PromiseKit6"
 
   `xcodebuild -project PromiseKit6.xcodeproj -showBuildSettings` =~ /CURRENT_PROJECT_VERSION = ((\d\.)+\d)/
-  abort("No version detected") if $1.nil?
-  s.version = $1
+
+  s.version = '6.8'
 
   s.source = {
     :git => "https://github.com/andredp/PromiseKit.git",
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'CorePromise', 'UIKit', 'Foundation'
   s.requires_arc = true
   
-  s.swift_versions = ['3.1', '3.2', '3.3', '3.4', '4.0', '4.1', '4.2', '5.0']
+  s.swift_version = '4.2'
 
   # CocoaPods requires us to specify the root deployment targets
   # even though for us it is nonsense. Our root spec has no
