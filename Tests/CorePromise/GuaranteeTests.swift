@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class GuaranteeTests: XCTestCase {
@@ -14,7 +14,7 @@ class GuaranteeTests: XCTestCase {
     }
 
     func testWait() {
-        XCTAssertEqual(after(.milliseconds(100)).map(on: nil){ 1 }.wait(), 1)
+        XCTAssertEqual(after6(.milliseconds(100)).map(on: nil){ 1 }.wait(), 1)
     }
 
     func testThenMap() {

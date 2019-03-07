@@ -1,10 +1,10 @@
 import Dispatch
 
 /// Provides `catch` and `recover` to your object that conforms to `Thenable`
-public protocol CatchMixin: Thenable
+public protocol CatchMixin6: Thenable6
 {}
 
-public extension CatchMixin {
+public extension CatchMixin6 {
     
     /**
      The provided closure executes when this promise rejects.
@@ -53,7 +53,7 @@ public class PMKFinalizer {
 }
 
 
-public extension CatchMixin {
+public extension CatchMixin6 {
     
     /**
      The provided closure executes when this promise rejects.
@@ -72,7 +72,7 @@ public extension CatchMixin {
      - Parameter body: The handler to execute if this promise is rejected.
      - SeeAlso: [Cancellation](https://github.com/mxcl/PromiseKit/blob/master/Documentation/CommonPatterns.md#cancellation)
      */
-    func recover<U: Thenable>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, policy: CatchPolicy = conf.catchPolicy, _ body: @escaping(Error) throws -> U) -> Promise6<T> where U.T == T {
+    func recover<U: Thenable6>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, policy: CatchPolicy = conf.catchPolicy, _ body: @escaping(Error) throws -> U) -> Promise6<T> where U.T == T {
         let rp = Promise6<U.T>(.pending)
         pipe {
             switch $0 {
@@ -83,7 +83,7 @@ public extension CatchMixin {
                     on.async(flags: flags) {
                         do {
                             let rv = try body(error)
-                            guard rv !== rp else { throw PMKError.returnedSelf }
+                            guard rv !== rp else { throw PMKError6.returnedSelf }
                             rv.pipe(to: rp.box.seal)
                         } catch {
                             rp.box.seal(.rejected(error))
@@ -194,7 +194,7 @@ public extension CatchMixin {
 }
 
 
-public extension CatchMixin where T == Void {
+public extension CatchMixin6 where T == Void {
     
     /**
      The provided closure executes when this promise rejects.

@@ -8,10 +8,10 @@ import Foundation
  Sadly. Please don’t use it.
 */
 @objc(__AnyPromise) public class __AnyPromise: NSObject {
-    fileprivate let box: Box<Any?>
+    fileprivate let box: Box6<Any?>
 
     @objc public init(resolver body: (@escaping (Any?) -> Void) -> Void) {
-        box = EmptyBox<Any?>()
+        box = EmptyBox6<Any?>()
         super.init()
         body {
             if let p = $0 as? AnyPromise {
@@ -106,10 +106,10 @@ import Foundation
     }
 }
 
-extension AnyPromise: Thenable, CatchMixin {
+extension AnyPromise: Thenable6, CatchMixin6 {
 
     /// - Returns: A new `AnyPromise` bound to a `Promise<Any>`.
-    public convenience init<U: Thenable>(_ bridge: U) {
+    public convenience init<U: Thenable6>(_ bridge: U) {
         self.init(__D: __AnyPromise(resolver: { resolve in
             bridge.pipe {
                 switch $0 {
@@ -159,7 +159,7 @@ extension AnyPromise: Thenable, CatchMixin {
         return value(forKey: "__d") as! __AnyPromise
     }
 
-    var box: Box<Any?> {
+    var box: Box6<Any?> {
         return d.box
     }
 

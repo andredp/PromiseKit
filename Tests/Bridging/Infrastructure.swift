@@ -1,9 +1,9 @@
-import PromiseKit
+import PromiseKit6
 
 // for BridgingTests.m
 @objc(PMKPromiseBridgeHelper) class PromiseBridgeHelper: NSObject {
     @objc func bridge1() -> AnyPromise {
-        let p = after(.milliseconds(10))
+        let p = after6(.milliseconds(10))
         return AnyPromise(p)
     }
 }

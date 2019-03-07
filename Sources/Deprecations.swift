@@ -42,7 +42,7 @@ public extension Promise6 {
     }
 }
 
-public extension Thenable {
+public extension Thenable6 {
 #if PMKFullDeprecations
     /// disabled due to ambiguity with the other `.flatMap`
     @available(*, deprecated, message: "See: `compactMap`")
@@ -52,7 +52,7 @@ public extension Thenable {
 #endif
 }
 
-public extension Thenable where T: Sequence {
+public extension Thenable6 where T: Sequence {
 #if PMKFullDeprecations
     /// disabled due to ambiguity with the other `.map`
     @available(*, deprecated, message: "See: `mapValues`")
@@ -73,7 +73,7 @@ public extension Thenable where T: Sequence {
     }
 }
 
-public extension Thenable where T: Collection {
+public extension Thenable6 where T: Collection {
     @available(*, deprecated, message: "See: `firstValue`")
     var first: Promise6<T.Iterator.Element> {
         return firstValue
@@ -85,7 +85,7 @@ public extension Thenable where T: Collection {
     }
 }
 
-public extension Thenable where T: Sequence, T.Iterator.Element: Comparable {
+public extension Thenable6 where T: Sequence, T.Iterator.Element: Comparable {
     @available(*, deprecated, message: "See: `sortedValues`")
     func sorted(on: DispatchQueue? = conf.Q.map) -> Promise6<[T.Iterator.Element]> {
         return sortedValues(on: on)

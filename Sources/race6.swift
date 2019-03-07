@@ -1,5 +1,5 @@
 @inline(__always)
-private func _race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
+private func _race<U: Thenable6>(_ thenables: [U]) -> Promise6<U.T> {
     let rp = Promise6<U.T>(.pending)
     for thenable in thenables {
         thenable.pipe(to: rp.box.seal)
@@ -17,7 +17,7 @@ private func _race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
  - Returns: The promise that resolves first
  - Warning: If the first resolution is a rejection, the returned promise is rejected
 */
-public func race<U: Thenable>(_ thenables: U...) -> Promise6<U.T> {
+public func race6<U: Thenable6>(_ thenables: U...) -> Promise6<U.T> {
     return _race(thenables)
 }
 
@@ -32,9 +32,9 @@ public func race<U: Thenable>(_ thenables: U...) -> Promise6<U.T> {
  - Warning: If the first resolution is a rejection, the returned promise is rejected
  - Remark: If the provided array is empty the returned promise is rejected with PMKError.badInput
 */
-public func race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
+public func race6<U: Thenable6>(_ thenables: [U]) -> Promise6<U.T> {
     guard !thenables.isEmpty else {
-        return Promise6(error: PMKError.badInput)
+        return Promise6(error: PMKError6.badInput)
     }
     return _race(thenables)
 }
@@ -48,7 +48,7 @@ public func race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
 
  - Returns: The guarantee that resolves first
 */
-public func race<T>(_ guarantees: Guarantee6<T>...) -> Guarantee6<T> {
+public func race6<T>(_ guarantees: Guarantee6<T>...) -> Guarantee6<T> {
     let rg = Guarantee6<T>(.pending)
     for guarantee in guarantees {
         guarantee.pipe(to: rg.box.seal)

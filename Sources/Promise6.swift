@@ -5,10 +5,10 @@ import Dispatch
  A `Promise` is a functional abstraction around a failable asynchronous operation.
  - See: `Thenable`
  */
-public final class Promise6<T>: Thenable, CatchMixin {
-    let box: Box<Result<T>>
+public final class Promise6<T>: Thenable6, CatchMixin6 {
+    let box: Box6<Result<T>>
 
-    fileprivate init(box: SealedBox<Result<T>>) {
+    fileprivate init(box: SealedBox6<Result<T>>) {
         self.box = box
     }
 
@@ -39,24 +39,24 @@ public final class Promise6<T>: Thenable, CatchMixin {
           }
      */
     public class func value(_ value: T) -> Promise6<T> {
-        return Promise6(box: SealedBox(value: .fulfilled(value)))
+        return Promise6(box: SealedBox6(value: .fulfilled(value)))
     }
 
     /// Initialize a new rejected promise.
     public init(error: Error) {
-        box = SealedBox(value: .rejected(error))
+        box = SealedBox6(value: .rejected(error))
     }
 
     /// Initialize a new promise bound to the provided `Thenable`.
-    public init<U: Thenable>(_ bridge: U) where U.T == T {
-        box = EmptyBox()
+    public init<U: Thenable6>(_ bridge: U) where U.T == T {
+        box = EmptyBox6()
         bridge.pipe(to: box.seal)
     }
 
     /// Initialize a new promise that can be resolved with the provided `Resolver`.
-    public init(resolver body: (Resolver<T>) throws -> Void) {
-        box = EmptyBox()
-        let resolver = Resolver(box)
+    public init(resolver body: (Resolver6<T>) throws -> Void) {
+        box = EmptyBox6()
+        let resolver = Resolver6(box)
         do {
             try body(resolver)
         } catch {
@@ -65,8 +65,8 @@ public final class Promise6<T>: Thenable, CatchMixin {
     }
 
     /// - Returns: a tuple of a new pending promise and its `Resolver`.
-    public class func pending() -> (promise: Promise6<T>, resolver: Resolver<T>) {
-        return { ($0, Resolver($0.box)) }(Promise6<T>(.pending))
+    public class func pending() -> (promise: Promise6<T>, resolver: Resolver6<T>) {
+        return { ($0, Resolver6($0.box)) }(Promise6<T>(.pending))
     }
 
     /// - See: `Thenable.pipe`
@@ -97,7 +97,7 @@ public final class Promise6<T>: Thenable, CatchMixin {
     }
 
     init(_: PMKUnambiguousInitializer) {
-        box = EmptyBox()
+        box = EmptyBox6()
     }
 }
 
@@ -109,7 +109,7 @@ public extension Promise6 {
     func wait() throws -> T {
 
         if Thread.isMainThread {
-            conf.logHandler(LogEvent.waitOnMainThread)
+            conf.logHandler(LogEvent6.waitOnMainThread)
         }
 
         var result = self.result
@@ -134,7 +134,7 @@ public extension Promise6 {
 extension Promise6 where T == Void {
     /// Initializes a new promise fulfilled with `Void`
     public convenience init() {
-        self.init(box: SealedBox(value: .fulfilled(Void())))
+        self.init(box: SealedBox6(value: .fulfilled(Void())))
     }
 }
 #endif

@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import Dispatch
 import XCTest
 
@@ -64,7 +64,7 @@ class ThenableTests: XCTestCase {
         Promise6.value("a").compactMap {
             Int($0)
         }.catch {
-            if case PMKError.compactMap = $0 {} else {
+            if case PMKError6.compactMap = $0 {} else {
                 XCTFail()
             }
             ex.fulfill()
@@ -118,7 +118,7 @@ class ThenableTests: XCTestCase {
         // extensive use of `done` in A+ tests since PMK 5
 
         let ex = expectation(description: "")
-        Promise6<Int>(error: PMKError.badInput).then { x -> Promise6<Int> in
+        Promise6<Int>(error: PMKError6.badInput).then { x -> Promise6<Int> in
             XCTFail()
             return .value(x)
         }.catch { _ in

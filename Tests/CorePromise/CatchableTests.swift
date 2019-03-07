@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import Dispatch
 import XCTest
 
@@ -230,7 +230,7 @@ extension CatchableTests {
             XCTAssertEqual($0, 1)
             throw Error.dummy
         }.ensureThen {
-            after(seconds: 0.01)
+            after6(seconds: 0.01)
         }.catch {
             XCTAssertEqual(Error.dummy, $0 as? Error)
         }.finally {
@@ -244,7 +244,7 @@ extension CatchableTests {
         let ex = expectation(description: "")
 
         Promise6.value(1).ensureThen {
-            after(seconds: 0.01)
+            after6(seconds: 0.01)
         }.done {
             XCTAssertEqual($0, 1)
         }.catch { _ in

@@ -1,7 +1,7 @@
 import Foundation
 import Dispatch
 
-private func _when<U: Thenable>(_ thenables: [U]) -> Promise6<Void> {
+private func _when<U: Thenable6>(_ thenables: [U]) -> Promise6<Void> {
     var countdown = thenables.count
     guard countdown > 0 else {
         return .value(Void())
@@ -66,37 +66,37 @@ private func _when<U: Thenable>(_ thenables: [U]) -> Promise6<Void> {
  - Note: `when` provides `NSProgress`.
  - SeeAlso: `when(resolved:)`
 */
-public func when<U: Thenable>(fulfilled thenables: [U]) -> Promise6<[U.T]> {
+public func when6<U: Thenable6>(fulfilled thenables: [U]) -> Promise6<[U.T]> {
     return _when(thenables).map(on: nil) { thenables.map{ $0.value! } }
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable>(fulfilled promises: U...) -> Promise6<Void> where U.T == Void {
+public func when6<U: Thenable6>(fulfilled promises: U...) -> Promise6<Void> where U.T == Void {
     return _when(promises)
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable>(fulfilled promises: [U]) -> Promise6<Void> where U.T == Void {
+public func when6<U: Thenable6>(fulfilled promises: [U]) -> Promise6<Void> where U.T == Void {
     return _when(promises)
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable, V: Thenable>(fulfilled pu: U, _ pv: V) -> Promise6<(U.T, V.T)> {
+public func when6<U: Thenable6, V: Thenable6>(fulfilled pu: U, _ pv: V) -> Promise6<(U.T, V.T)> {
     return _when([pu.asVoid(), pv.asVoid()]).map(on: nil) { (pu.value!, pv.value!) }
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable, V: Thenable, W: Thenable>(fulfilled pu: U, _ pv: V, _ pw: W) -> Promise6<(U.T, V.T, W.T)> {
+public func when6<U: Thenable6, V: Thenable6, W: Thenable6>(fulfilled pu: U, _ pv: V, _ pw: W) -> Promise6<(U.T, V.T, W.T)> {
     return _when([pu.asVoid(), pv.asVoid(), pw.asVoid()]).map(on: nil) { (pu.value!, pv.value!, pw.value!) }
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable, V: Thenable, W: Thenable, X: Thenable>(fulfilled pu: U, _ pv: V, _ pw: W, _ px: X) -> Promise6<(U.T, V.T, W.T, X.T)> {
+public func when6<U: Thenable6, V: Thenable6, W: Thenable6, X: Thenable6>(fulfilled pu: U, _ pv: V, _ pw: W, _ px: X) -> Promise6<(U.T, V.T, W.T, X.T)> {
     return _when([pu.asVoid(), pv.asVoid(), pw.asVoid(), px.asVoid()]).map(on: nil) { (pu.value!, pv.value!, pw.value!, px.value!) }
 }
 
 /// Wait for all promises in a set to fulfill.
-public func when<U: Thenable, V: Thenable, W: Thenable, X: Thenable, Y: Thenable>(fulfilled pu: U, _ pv: V, _ pw: W, _ px: X, _ py: Y) -> Promise6<(U.T, V.T, W.T, X.T, Y.T)> {
+public func when6<U: Thenable6, V: Thenable6, W: Thenable6, X: Thenable6, Y: Thenable6>(fulfilled pu: U, _ pv: V, _ pw: W, _ px: X, _ py: Y) -> Promise6<(U.T, V.T, W.T, X.T, Y.T)> {
     return _when([pu.asVoid(), pv.asVoid(), pw.asVoid(), px.asVoid(), py.asVoid()]).map(on: nil) { (pu.value!, pv.value!, pw.value!, px.value!, py.value!) }
 }
 
@@ -132,10 +132,10 @@ public func when<U: Thenable, V: Thenable, W: Thenable, X: Thenable, Y: Thenable
  - SeeAlso: `when(resolved:)`
  */
 
-public func when<It: IteratorProtocol>(fulfilled promiseIterator: It, concurrently: Int) -> Promise6<[It.Element.T]> where It.Element: Thenable {
+public func when6<It: IteratorProtocol>(fulfilled promiseIterator: It, concurrently: Int) -> Promise6<[It.Element.T]> where It.Element: Thenable6 {
 
     guard concurrently > 0 else {
-        return Promise6(error: PMKError.badInput)
+        return Promise6(error: PMKError6.badInput)
     }
 
     var generator = promiseIterator
@@ -222,12 +222,12 @@ public func when<It: IteratorProtocol>(fulfilled promiseIterator: It, concurrent
  - Note: we do not provide tuple variants for `when(resolved:)` but will accept a pull-request
  - Remark: Doesn't take Thenable due to protocol `associatedtype` paradox
 */
-public func when<T>(resolved promises: Promise6<T>...) -> Guarantee6<[Result<T>]> {
-    return when(resolved: promises)
+public func when6<T>(resolved promises: Promise6<T>...) -> Guarantee6<[Result<T>]> {
+    return when6(resolved: promises)
 }
 
 /// - See: `when(resolved: Promise<T>...)`
-public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee6<[Result<T>]> {
+public func when6<T>(resolved promises: [Promise6<T>]) -> Guarantee6<[Result<T>]> {
     guard !promises.isEmpty else {
         return .value([])
     }
@@ -252,11 +252,11 @@ public func when<T>(resolved promises: [Promise6<T>]) -> Guarantee6<[Result<T>]>
 }
 
 /// Waits on all provided Guarantees.
-public func when(_ guarantees: Guarantee6<Void>...) -> Guarantee6<Void> {
-    return when(guarantees: guarantees)
+public func when6(_ guarantees: Guarantee6<Void>...) -> Guarantee6<Void> {
+    return when6(guarantees: guarantees)
 }
 
 // Waits on all provided Guarantees.
-public func when(guarantees: [Guarantee6<Void>]) -> Guarantee6<Void> {
-    return when(fulfilled: guarantees).recover{ _ in }.asVoid()
+public func when6(guarantees: [Guarantee6<Void>]) -> Guarantee6<Void> {
+    return when6(fulfilled: guarantees).recover{ _ in }.asVoid()
 }

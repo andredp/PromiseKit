@@ -1,12 +1,12 @@
 import Foundation
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class CancellationTests: XCTestCase {
     func testCancellation() {
         let ex1 = expectation(description: "")
 
-        let p = after(seconds: 0).done { _ in
+        let p = after6(seconds: 0).done { _ in
             throw LocalError.cancel
         }.done {
             XCTFail()
@@ -25,7 +25,7 @@ class CancellationTests: XCTestCase {
     func testThrowCancellableErrorThatIsNotCancelled() {
         let expct = expectation(description: "")
 
-        after(seconds: 0).done { _ in
+        after6(seconds: 0).done { _ in
             throw LocalError.notCancel
         }.done {
             XCTFail()
@@ -41,7 +41,7 @@ class CancellationTests: XCTestCase {
         let ex1 = expectation(description: "")
         let ex2 = expectation(description: "")
 
-        let p = after(seconds: 0).done { _ in
+        let p = after6(seconds: 0).done { _ in
             throw CocoaError.cancelled
         }.recover(policy: .allErrors) { err -> Promise6<Void> in
             ex1.fulfill()
@@ -64,7 +64,7 @@ class CancellationTests: XCTestCase {
     func testFoundationBridging1() {
         let ex = expectation(description: "")
 
-        let p = after(seconds: 0).done { _ in
+        let p = after6(seconds: 0).done { _ in
             throw CocoaError.cancelled
         }
         p.catch { _ in
@@ -97,7 +97,7 @@ class CancellationTests: XCTestCase {
 
 #if swift(>=3.2)
     func testIsCancelled() {
-        XCTAssertTrue(PMKError.cancelled.isCancelled)
+        XCTAssertTrue(PMKError6.cancelled.isCancelled)
         XCTAssertTrue(URLError.cancelled.isCancelled)
         XCTAssertTrue(CocoaError.cancelled.isCancelled)
         XCTAssertFalse(CocoaError(_nsError: NSError(domain: NSCocoaErrorDomain, code: CocoaError.Code.coderInvalidValue.rawValue)).isCancelled)

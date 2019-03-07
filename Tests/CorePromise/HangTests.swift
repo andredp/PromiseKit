@@ -1,11 +1,11 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class HangTests: XCTestCase {
     func test() {
         let ex = expectation(description: "block executed")
         do {
-            let value = try hang(after(seconds: 0.02).then { _ -> Promise6<Int> in
+            let value = try hang6(after6(seconds: 0.02).then { _ -> Promise6<Int> in
                 ex.fulfill()
                 return .value(1)
             })
@@ -23,7 +23,7 @@ class HangTests: XCTestCase {
     func testError() {
         var value = 0
         do {
-            _ = try hang(after(seconds: 0.02).done {
+            _ = try hang6(after6(seconds: 0.02).done {
                 value = 1
                 throw Error.test
             })

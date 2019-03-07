@@ -15,7 +15,7 @@
     case misc (String)
     ````
 */
-public enum LogEvent {
+public enum LogEvent6 {
     /// A promise or guarantee has blocked the main thread
     case waitOnMainThread
     

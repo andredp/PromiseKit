@@ -1,40 +1,40 @@
 import Dispatch
 
-enum Sealant<R> {
-    case pending(Handlers<R>)
+enum Sealant6<R> {
+    case pending(Handlers6<R>)
     case resolved(R)
 }
 
-final class Handlers<R> {
+final class Handlers6<R> {
     var bodies: [(R) -> Void] = []
     func append(_ item: @escaping(R) -> Void) { bodies.append(item) }
 }
 
 /// - Remark: not protocol ∵ http://www.russbishop.net/swift-associated-types-cont
-class Box<T> {
-    func inspect() -> Sealant<T> { fatalError() }
-    func inspect(_: (Sealant<T>) -> Void) { fatalError() }
+class Box6<T> {
+    func inspect() -> Sealant6<T> { fatalError() }
+    func inspect(_: (Sealant6<T>) -> Void) { fatalError() }
     func seal(_: T) {}
 }
 
-final class SealedBox<T>: Box<T> {
+final class SealedBox6<T>: Box6<T> {
     let value: T
 
     init(value: T) {
         self.value = value
     }
 
-    override func inspect() -> Sealant<T> {
+    override func inspect() -> Sealant6<T> {
         return .resolved(value)
     }
 }
 
-class EmptyBox<T>: Box<T> {
-    private var sealant = Sealant<T>.pending(.init())
+class EmptyBox6<T>: Box6<T> {
+    private var sealant = Sealant6<T>.pending(.init())
     private let barrier = DispatchQueue(label: "org.promisekit.barrier", attributes: .concurrent)
 
     override func seal(_ value: T) {
-        var handlers: Handlers<T>!
+        var handlers: Handlers6<T>!
         barrier.sync(flags: .barrier) {
             guard case .pending(let _handlers) = self.sealant else {
                 return  // already fulfilled!
@@ -56,15 +56,15 @@ class EmptyBox<T>: Box<T> {
         // any other solution has potential races
     }
 
-    override func inspect() -> Sealant<T> {
-        var rv: Sealant<T>!
+    override func inspect() -> Sealant6<T> {
+        var rv: Sealant6<T>!
         barrier.sync {
             rv = self.sealant
         }
         return rv
     }
 
-    override func inspect(_ body: (Sealant<T>) -> Void) {
+    override func inspect(_ body: (Sealant6<T>) -> Void) {
         var sealed = false
         barrier.sync(flags: .barrier) {
             switch sealant {

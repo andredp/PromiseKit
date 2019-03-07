@@ -7,7 +7,7 @@ import Dispatch
 
  We would like it to be, but sadly `Swift` does not expose `dispatch_once` et al. which is what we used to use in order to make the configuration immutable once first used.
 */
-public struct PMKConfiguration {
+public struct PMKConfiguration6 {
     /// The default queues that promises handlers dispatch to
     public var Q: (map: DispatchQueue?, return: DispatchQueue?) = (map: DispatchQueue.main, return: DispatchQueue.main)
 
@@ -17,7 +17,7 @@ public struct PMKConfiguration {
     /// The closure used to log PromiseKit events.
     /// Not thread safe; change before processing any promises.
     /// - Note: The default handler calls `print()`
-    public var logHandler: (LogEvent) -> () = { event in
+    public var logHandler: (LogEvent6) -> () = { event in
         switch event {
         case .waitOnMainThread:
             print("PromiseKit: warning: `wait()` called on main thread!")
@@ -32,4 +32,4 @@ public struct PMKConfiguration {
 }
 
 /// Modify this as soon as possible in your application’s lifetime
-public var conf = PMKConfiguration()
+public var conf = PMKConfiguration6()

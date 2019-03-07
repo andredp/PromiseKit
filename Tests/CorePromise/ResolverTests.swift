@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class WrapTests: XCTestCase {
@@ -12,25 +12,25 @@ class WrapTests: XCTestCase {
         }
 
         func fetchWithCompletionBlock(block: @escaping(Int?, Error?) -> Void) {
-            after(.milliseconds(20)).done {
+            after6(.milliseconds(20)).done {
                 block(self.value, self.error)
             }
         }
 
         func fetchWithCompletionBlock2(block: @escaping(Error?, Int?) -> Void) {
-            after(.milliseconds(20)).done {
+            after6(.milliseconds(20)).done {
                 block(self.error, self.value)
             }
         }
 
         func fetchWithCompletionBlock3(block: @escaping(Int, Error?) -> Void) {
-            after(.milliseconds(20)).done {
+            after6(.milliseconds(20)).done {
                 block(self.value ?? -99, self.error)
             }
         }
 
         func fetchWithCompletionBlock4(block: @escaping(Error?) -> Void) {
-            after(.milliseconds(20)).done {
+            after6(.milliseconds(20)).done {
                 block(self.error)
             }
         }
@@ -73,7 +73,7 @@ class WrapTests: XCTestCase {
             kittenFetcher.fetchWithCompletionBlock(block: seal.resolve)
         }.catch { error in
             defer { ex.fulfill() }
-            guard case PMKError.invalidCallingConvention = error else {
+            guard case PMKError6.invalidCallingConvention = error else {
                 return XCTFail()
             }
         }
@@ -147,7 +147,7 @@ class WrapTests: XCTestCase {
             var ex: XCTestExpectation!
 
             deinit {
-                after(.milliseconds(100)).done(ex.fulfill)
+                after6(.milliseconds(100)).done(ex.fulfill)
             }
         }
 
@@ -172,7 +172,7 @@ class WrapTests: XCTestCase {
         }
 
         func bar() -> Promise6<Void> {
-            return Promise6<Void> { (seal: Resolver<Void>) in
+            return Promise6<Void> { (seal: Resolver6<Void>) in
                 foo(success: seal.fulfill, failure: seal.reject)
             }
         }

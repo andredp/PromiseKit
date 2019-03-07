@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import Dispatch
 import XCTest
 
@@ -105,7 +105,7 @@ class PromiseTests: XCTestCase {
     func testThrowInFirstly() {
         let ex = expectation(description: "")
 
-        firstly { () -> Promise6<Int> in
+        firstly6 { () -> Promise6<Int> in
             throw Error.dummy
         }.catch {
             XCTAssertEqual($0 as? Error, Error.dummy)
@@ -116,11 +116,11 @@ class PromiseTests: XCTestCase {
     }
 
     func testWait() throws {
-        let p = after(.milliseconds(100)).then(on: nil){ Promise6.value(1) }
+        let p = after6(.milliseconds(100)).then(on: nil){ Promise6.value(1) }
         XCTAssertEqual(try p.wait(), 1)
 
         do {
-            let p = after(.milliseconds(100)).map(on: nil){ throw Error.dummy }
+            let p = after6(.milliseconds(100)).map(on: nil){ throw Error.dummy }
             try p.wait()
             XCTFail()
         } catch {

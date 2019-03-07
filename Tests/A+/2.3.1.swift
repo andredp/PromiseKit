@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class Test231: XCTestCase {
@@ -10,7 +10,7 @@ class Test231: XCTestCase {
                     return promise
                 }
                 promise.catch { err in
-                    if case PMKError.returnedSelf = err {
+                    if case PMKError6.returnedSelf = err {
                         expectation.fulfill()
                     }
                 }
@@ -21,7 +21,7 @@ class Test231: XCTestCase {
                     return promise
                 }
                 promise.catch { err in
-                    if case PMKError.returnedSelf = err {
+                    if case PMKError6.returnedSelf = err {
                         expectation.fulfill()
                     }
                 }

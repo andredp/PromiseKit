@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class DeprecationTests: XCTestCase {
@@ -90,7 +90,7 @@ class DeprecationTests: XCTestCase {
         }.catch {
             //TODO should be `flatMap`, but how to enact that without causing
             // compiler to warn when building PromiseKit for end-users? LOL
-            guard case PMKError.compactMap = $0 else { return XCTFail() }
+            guard case PMKError6.compactMap = $0 else { return XCTFail() }
             ex.fulfill()
         }
         wait(for: [ex], timeout: 10)
@@ -148,7 +148,7 @@ class DeprecationTests: XCTestCase {
     }
 
     func testPMKErrorFlatMap() {
-        XCTAssertNotNil(PMKError.flatMap(1, Int.self).errorDescription)
+        XCTAssertNotNil(PMKError6.flatMap(1, Int.self).errorDescription)
     }
 }
 

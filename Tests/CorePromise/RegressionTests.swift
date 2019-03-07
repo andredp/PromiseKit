@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class RegressionTests: XCTestCase {
@@ -18,7 +18,7 @@ class RegressionTests: XCTestCase {
             let promise1 = Promise6<Void>(error: Error.dummy)
             let promise2 = promise1.recover(on: nil) { _ in promise1 }
             promise2.catch(on: nil) { err in
-                if case PMKError.returnedSelf = err {
+                if case PMKError6.returnedSelf = err {
                     XCTFail()
                 }
             }

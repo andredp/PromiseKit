@@ -1,6 +1,6 @@
 import Foundation
 
-public enum PMKError: Error {
+public enum PMKError6: Error {
     /**
      The completionHandler with form `(T?, Error?)` was called with `(nil, nil)`.
      This is invalid as per Cocoa/Apple calling conventions.
@@ -34,7 +34,7 @@ public enum PMKError: Error {
     case emptySequence
 }
 
-extension PMKError: CustomDebugStringConvertible {
+extension PMKError6: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .flatMap(let obj, let type):
@@ -55,7 +55,7 @@ extension PMKError: CustomDebugStringConvertible {
     }
 }
 
-extension PMKError: LocalizedError {
+extension PMKError6: LocalizedError {
     public var errorDescription: String? {
         return debugDescription
     }
@@ -74,7 +74,7 @@ extension Error {
     public var isCancelled: Bool {
         do {
             throw self
-        } catch PMKError.cancelled {
+        } catch PMKError6.cancelled {
             return true
         } catch let error as CancellableError {
             return error.isCancelled

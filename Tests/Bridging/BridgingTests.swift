@@ -1,5 +1,5 @@
 import Foundation
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class BridgingTests: XCTestCase {
@@ -131,7 +131,7 @@ class BridgingTests: XCTestCase {
 
     func testFirstlyReturningAnyPromiseSuccess() {
         let ex = expectation(description: "")
-        firstly {
+        firstly6 {
             PMKDummyAnyPromise_Error()
         }.catch { error in
             ex.fulfill()
@@ -141,7 +141,7 @@ class BridgingTests: XCTestCase {
 
     func testFirstlyReturningAnyPromiseError() {
         let ex = expectation(description: "")
-        firstly {
+        firstly6 {
             PMKDummyAnyPromise_YES()
         }.done { _ in
             ex.fulfill()
@@ -154,7 +154,7 @@ class BridgingTests: XCTestCase {
 
         // AnyPromise.then { return x }
 
-        let input = after(seconds: 0).map{ 1 }
+        let input = after6(seconds: 0).map{ 1 }
 
         AnyPromise(input).then { obj -> Promise6<Int> in
             XCTAssertEqual(obj as? Int, 1)
@@ -172,11 +172,11 @@ class BridgingTests: XCTestCase {
 
         // AnyPromise.then { return AnyPromise }
 
-        let input = after(seconds: 0).map{ 1 }
+        let input = after6(seconds: 0).map{ 1 }
 
         AnyPromise(input).then { obj -> AnyPromise in
             XCTAssertEqual(obj as? Int, 1)
-            return AnyPromise(after(seconds: 0).map{ 2 })
+            return AnyPromise(after6(seconds: 0).map{ 2 })
         }.done { obj in
             XCTAssertEqual(obj as? Int, 2)
             ex.fulfill()
@@ -190,11 +190,11 @@ class BridgingTests: XCTestCase {
 
         // AnyPromise.then { return Promise<Int> }
 
-        let input = after(seconds: 0).map{ 1 }
+        let input = after6(seconds: 0).map{ 1 }
 
         AnyPromise(input).then { obj -> Promise6<Int> in
             XCTAssertEqual(obj as? Int, 1)
-            return after(seconds: 0).map{ 2 }
+            return after6(seconds: 0).map{ 2 }
         }.done { value in
             XCTAssertEqual(value, 2)
             ex.fulfill()
@@ -208,7 +208,7 @@ class BridgingTests: XCTestCase {
     func test4() {
         let ex = expectation(description: "")
         Promise6.value(1).then { _ -> AnyPromise in
-            return AnyPromise(after(seconds: 0).map{ 1 })
+            return AnyPromise(after6(seconds: 0).map{ 1 })
         }.done { x in
             XCTAssertEqual(x as? Int, 1)
             ex.fulfill()
@@ -221,7 +221,7 @@ class BridgingTests: XCTestCase {
         let ex = expectation(description: "")
 
         Promise6.value(1).then { _ -> AnyPromise in
-            let promise = after(.milliseconds(100)).done{ throw Error.dummy }
+            let promise = after6(.milliseconds(100)).done{ throw Error.dummy }
             return AnyPromise(promise)
         }.catch { err in
             ex.fulfill()

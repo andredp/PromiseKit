@@ -1,7 +1,7 @@
 import Dispatch
 
 /// Thenable represents an asynchronous operation that can be chained.
-public protocol Thenable: class {
+public protocol Thenable6: class {
     /// The type of the wrapped value
     associatedtype T
 
@@ -12,7 +12,7 @@ public protocol Thenable: class {
     var result: Result<T>? { get }
 }
 
-public extension Thenable {
+public extension Thenable6 {
     /**
      The provided closure executes when this promise resolves.
      
@@ -30,7 +30,7 @@ public extension Thenable {
                //…
            }
      */
-    func then<U: Thenable>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(T) throws -> U) -> Promise6<U.T> {
+    func then<U: Thenable6>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ body: @escaping(T) throws -> U) -> Promise6<U.T> {
         let rp = Promise6<U.T>(.pending)
         pipe {
             switch $0 {
@@ -38,7 +38,7 @@ public extension Thenable {
                 on.async(flags: flags) {
                     do {
                         let rv = try body(value)
-                        guard rv !== rp else { throw PMKError.returnedSelf }
+                        guard rv !== rp else { throw PMKError6.returnedSelf }
                         rv.pipe(to: rp.box.seal)
                     } catch {
                         rp.box.seal(.rejected(error))
@@ -112,7 +112,7 @@ public extension Thenable {
                         if let rv = try transform(value) {
                             rp.box.seal(.fulfilled(rv))
                         } else {
-                            throw PMKError.compactMap(value, U.self)
+                            throw PMKError6.compactMap(value, U.self)
                         }
                     } catch {
                         rp.box.seal(.rejected(error))
@@ -216,7 +216,7 @@ public extension Thenable {
     }
 }
 
-public extension Thenable {
+public extension Thenable6 {
     /**
      - Returns: The error with which this promise was rejected; `nil` if this promise is not rejected.
      */
@@ -274,7 +274,7 @@ public extension Thenable {
     }
 }
 
-public extension Thenable where T: Sequence {
+public extension Thenable6 where T: Sequence {
     /**
      `Promise<[T]>` => `T` -> `U` => `Promise<[U]>`
 
@@ -339,9 +339,9 @@ public extension Thenable where T: Sequence {
              // $0 => [2,4,6]
          }
      */
-    func thenMap<U: Thenable>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ transform: @escaping(T.Iterator.Element) throws -> U) -> Promise6<[U.T]> {
+    func thenMap<U: Thenable6>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ transform: @escaping(T.Iterator.Element) throws -> U) -> Promise6<[U.T]> {
         return then(on: on, flags: flags) {
-            when(fulfilled: try $0.map(transform))
+            when6(fulfilled: try $0.map(transform))
         }
     }
 
@@ -356,9 +356,9 @@ public extension Thenable where T: Sequence {
              // $0 => [1,1,2,2,3,3]
          }
      */
-    func thenFlatMap<U: Thenable>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ transform: @escaping(T.Iterator.Element) throws -> U) -> Promise6<[U.T.Iterator.Element]> where U.T: Sequence {
+    func thenFlatMap<U: Thenable6>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ transform: @escaping(T.Iterator.Element) throws -> U) -> Promise6<[U.T.Iterator.Element]> where U.T: Sequence {
         return then(on: on, flags: flags) {
-            when(fulfilled: try $0.map(transform))
+            when6(fulfilled: try $0.map(transform))
         }.map(on: nil) {
             $0.flatMap{ $0 }
         }
@@ -382,14 +382,14 @@ public extension Thenable where T: Sequence {
     }
 }
 
-public extension Thenable where T: Collection {
+public extension Thenable6 where T: Collection {
     /// - Returns: a promise fulfilled with the first value of this `Collection` or, if empty, a promise rejected with PMKError.emptySequence.
     var firstValue: Promise6<T.Iterator.Element> {
         return map(on: nil) { aa in
             if let a1 = aa.first {
                 return a1
             } else {
-                throw PMKError.emptySequence
+                throw PMKError6.emptySequence
             }
         }
     }
@@ -399,7 +399,7 @@ public extension Thenable where T: Collection {
             for x in $0 where test(x) {
                 return x
             }
-            throw PMKError.emptySequence
+            throw PMKError6.emptySequence
         }
     }
 
@@ -407,7 +407,7 @@ public extension Thenable where T: Collection {
     var lastValue: Promise6<T.Iterator.Element> {
         return map(on: nil) { aa in
             if aa.isEmpty {
-                throw PMKError.emptySequence
+                throw PMKError6.emptySequence
             } else {
                 let i = aa.index(aa.endIndex, offsetBy: -1)
                 return aa[i]
@@ -416,7 +416,7 @@ public extension Thenable where T: Collection {
     }
 }
 
-public extension Thenable where T: Sequence, T.Iterator.Element: Comparable {
+public extension Thenable6 where T: Sequence, T.Iterator.Element: Comparable {
     /// - Returns: a promise fulfilled with the sorted values of this `Sequence`.
     func sortedValues(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil) -> Promise6<[T.Iterator.Element]> {
         return map(on: on, flags: flags){ $0.sorted() }

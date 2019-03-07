@@ -5,16 +5,16 @@ import Dispatch
  A `Guarantee` is a functional abstraction around an asynchronous operation that cannot error.
  - See: `Thenable`
 */
-public final class Guarantee6<T>: Thenable {
-    let box: PromiseKit.Box<T>
+public final class Guarantee6<T>: Thenable6 {
+    let box: PromiseKit6.Box6<T>
 
-    fileprivate init(box: SealedBox<T>) {
+    fileprivate init(box: SealedBox6<T>) {
         self.box = box
     }
 
     /// Returns a `Guarantee` sealed with the provided value.
     public static func value(_ value: T) -> Guarantee6<T> {
-        return .init(box: SealedBox(value: value))
+        return .init(box: SealedBox6(value: value))
     }
 
     /// Returns a pending `Guarantee` that can be resolved with the provided closure’s parameter.
@@ -54,11 +54,11 @@ public final class Guarantee6<T>: Thenable {
         }
     }
 
-    final private class Box<T>: EmptyBox<T> {
+    final private class Box<T>: EmptyBox6<T> {
         deinit {
             switch inspect() {
             case .pending:
-                PromiseKit.conf.logHandler(.pendingGuaranteeDeallocated)
+                PromiseKit6.conf.logHandler(.pendingGuaranteeDeallocated)
             case .resolved:
                 break
             }
@@ -158,7 +158,7 @@ public extension Guarantee6 where T: Sequence {
      */
     func thenMap<U>(on: DispatchQueue? = conf.Q.map, flags: DispatchWorkItemFlags? = nil, _ transform: @escaping(T.Iterator.Element) -> Guarantee6<U>) -> Guarantee6<[U]> {
         return then(on: on, flags: flags) {
-            when(fulfilled: $0.map(transform))
+            when6(fulfilled: $0.map(transform))
         }.recover {
             // if happens then is bug inside PromiseKit
             fatalError(String(describing: $0))
@@ -169,7 +169,7 @@ public extension Guarantee6 where T: Sequence {
 #if swift(>=3.1)
 public extension Guarantee6 where T == Void {
     convenience init() {
-        self.init(box: SealedBox(value: Void()))
+        self.init(box: SealedBox6(value: Void()))
     }
 }
 #endif

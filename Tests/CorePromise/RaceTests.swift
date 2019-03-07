@@ -1,10 +1,10 @@
 import XCTest
-import PromiseKit
+import PromiseKit6
 
 class RaceTests: XCTestCase {
     func test1() {
         let ex = expectation(description: "")
-        race(after(.milliseconds(10)).then{ Promise6.value(1) }, after(seconds: 1).map{ 2 }).done { index in
+        race6(after6(.milliseconds(10)).then{ Promise6.value(1) }, after6(seconds: 1).map{ 2 }).done { index in
             XCTAssertEqual(index, 1)
             ex.fulfill()
         }.silenceWarning()
@@ -13,7 +13,7 @@ class RaceTests: XCTestCase {
     
     func test2() {
         let ex = expectation(description: "")
-        race(after(seconds: 1).map{ 1 }, after(.milliseconds(10)).map{ 2 }).done { index in
+        race6(after6(seconds: 1).map{ 1 }, after6(.milliseconds(10)).map{ 2 }).done { index in
             XCTAssertEqual(index, 2)
             ex.fulfill()
         }
@@ -22,8 +22,8 @@ class RaceTests: XCTestCase {
 
     func test1Array() {
         let ex = expectation(description: "")
-        let promises = [after(.milliseconds(10)).map{ 1 }, after(seconds: 1).map{ 2 }]
-        race(promises).done { index in
+        let promises = [after6(.milliseconds(10)).map{ 1 }, after6(seconds: 1).map{ 2 }]
+        race6(promises).done { index in
             XCTAssertEqual(index, 1)
             ex.fulfill()
         }.silenceWarning()
@@ -32,7 +32,7 @@ class RaceTests: XCTestCase {
     
     func test2Array() {
         let ex = expectation(description: "")
-        race(after(seconds: 1).map{ 1 }, after(.milliseconds(10)).map{ 2 }).done { index in
+        race6(after6(seconds: 1).map{ 1 }, after6(.milliseconds(10)).map{ 2 }).done { index in
             XCTAssertEqual(index, 2)
             ex.fulfill()
         }
@@ -42,8 +42,8 @@ class RaceTests: XCTestCase {
     func testEmptyArray() {
         let ex = expectation(description: "")
         let empty = [Promise6<Int>]()
-        race(empty).catch {
-            guard case PMKError.badInput = $0 else { return XCTFail() }
+        race6(empty).catch {
+            guard case PMKError6.badInput = $0 else { return XCTFail() }
             ex.fulfill()
         }
         wait(for: [ex], timeout: 10)

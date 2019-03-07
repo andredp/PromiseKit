@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class AnyPromiseTests: XCTestCase {
@@ -12,7 +12,7 @@ class AnyPromiseTests: XCTestCase {
     }
 
     func testRejectedResult() {
-        switch AnyPromise(Promise6<Int>(error: PMKError.badInput)).result {
+        switch AnyPromise(Promise6<Int>(error: PMKError6.badInput)).result {
         case .rejected(let err)?:
             print(err)
             break

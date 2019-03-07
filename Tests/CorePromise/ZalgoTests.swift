@@ -1,5 +1,5 @@
 import XCTest
-import PromiseKit
+import PromiseKit6
 
 class ZalgoTests: XCTestCase {
     func test1() {
@@ -33,14 +33,14 @@ class ZalgoTests: XCTestCase {
         let ex = (expectation(description: ""), expectation(description: ""))
 
         var p1: Promise6<Void>!
-        p1 = after(.milliseconds(100)).then(on: nil) { _ -> Promise6<Void> in
+        p1 = after6(.milliseconds(100)).then(on: nil) { _ -> Promise6<Void> in
             ex.0.fulfill()
             return p1
         }
 
         p1.catch { err in
             defer{ ex.1.fulfill() }
-            guard case PMKError.returnedSelf = err else { return XCTFail() }
+            guard case PMKError6.returnedSelf = err else { return XCTFail() }
         }
 
         waitForExpectations(timeout: 1)

@@ -1,8 +1,8 @@
 /// An object for resolving promises
-public final class Resolver<T> {
-    let box: Box<Result<T>>
+public final class Resolver6<T> {
+    let box: Box6<Result<T>>
 
-    init(_ box: Box<Result<T>>) {
+    init(_ box: Box6<Result<T>>) {
         self.box = box
     }
 
@@ -13,7 +13,7 @@ public final class Resolver<T> {
     }
 }
 
-public extension Resolver {
+public extension Resolver6 {
     /// Fulfills the promise with the provided value
     func fulfill(_ value: T) {
         box.seal(.fulfilled(value))
@@ -36,7 +36,7 @@ public extension Resolver {
         } else if let obj = obj {
             fulfill(obj)
         } else {
-            reject(PMKError.invalidCallingConvention)
+            reject(PMKError6.invalidCallingConvention)
         }
     }
 
@@ -56,7 +56,7 @@ public extension Resolver {
 }
 
 #if swift(>=3.1)
-extension Resolver where T == Void {
+extension Resolver6 where T == Void {
     /// Fulfills the promise unless error is non-nil
     public func resolve(_ error: Error?) {
         if let error = error {
@@ -87,7 +87,7 @@ public enum Result<T> {
     case rejected(Error)
 }
 
-public extension PromiseKit.Result {
+public extension PromiseKit6.Result {
     var isFulfilled: Bool {
         switch self {
         case .fulfilled:
