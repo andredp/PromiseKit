@@ -43,7 +43,7 @@ class CancellationTests: XCTestCase {
 
         let p = after(seconds: 0).done { _ in
             throw CocoaError.cancelled
-        }.recover(policy: .allErrors) { err -> Promise<Void> in
+        }.recover(policy: .allErrors) { err -> Promise6<Void> in
             ex1.fulfill()
             XCTAssertTrue(err.isCancelled)
             throw err
@@ -81,7 +81,7 @@ class CancellationTests: XCTestCase {
     func testFoundationBridging2() {
         let ex = expectation(description: "")
 
-        let p = Promise().done {
+        let p = Promise6().done {
             throw URLError.cancelled
         }
         p.catch { _ in

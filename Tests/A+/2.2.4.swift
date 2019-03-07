@@ -46,7 +46,7 @@ class Test224: XCTestCase {
                 }
                 specify("when one `onFulfilled` is added inside another `onFulfilled`") { _, expectation in
                     var firstOnFulfilledFinished = false
-                    let promise = Promise()
+                    let promise = Promise6()
                     promise.done {
                         promise.done {
                             XCTAssertTrue(firstOnFulfilledFinished)
@@ -57,8 +57,8 @@ class Test224: XCTestCase {
                 }
 
                 specify("when `onFulfilled` is added inside an `onRejected`") { _, expectation in
-                    let promise1 = Promise<Void>(error: Error.dummy)
-                    let promise2 = Promise()
+                    let promise1 = Promise6<Void>(error: Error.dummy)
+                    let promise2 = Promise6()
                     var firstOnRejectedFinished = false
 
                     promise1.catch { _ in
@@ -105,8 +105,8 @@ class Test224: XCTestCase {
                     XCTAssertFalse(onRejectedCalled)
                 }
                 specify("when `onRejected` is added inside an `onFulfilled`") { d, expectation in
-                    let promise1 = Promise()
-                    let promise2 = Promise<Void>(error: Error.dummy)
+                    let promise1 = Promise6()
+                    let promise2 = Promise6<Void>(error: Error.dummy)
                     var firstOnFulfilledFinished = false
 
                     promise1.done { _ in
@@ -118,7 +118,7 @@ class Test224: XCTestCase {
                     }.silenceWarning()
                 }
                 specify("when one `onRejected` is added inside another `onRejected`") { d, expectation in
-                    let promise = Promise<Void>(error: Error.dummy)
+                    let promise = Promise6<Void>(error: Error.dummy)
                     var firstOnRejectedFinished = false;
 
                     promise.catch { _ in

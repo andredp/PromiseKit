@@ -6,7 +6,7 @@ class ThenableTests: XCTestCase {
     func testGet() {
         let ex1 = expectation(description: "")
         let ex2 = expectation(description: "")
-        Promise.value(1).get {
+        Promise6.value(1).get {
             XCTAssertEqual($0, 1)
             ex1.fulfill()
         }.done {
@@ -18,7 +18,7 @@ class ThenableTests: XCTestCase {
 
     func testCompactMap() {
         let ex = expectation(description: "")
-        Promise.value(1.0).compactMap {
+        Promise6.value(1.0).compactMap {
             Int($0)
         }.done {
             XCTAssertEqual($0, 1)
@@ -32,7 +32,7 @@ class ThenableTests: XCTestCase {
         enum E: Error { case dummy }
 
         let ex = expectation(description: "")
-        Promise.value("a").compactMap { x -> Int in
+        Promise6.value("a").compactMap { x -> Int in
             throw E.dummy
         }.catch {
             if case E.dummy = $0 {} else {
@@ -48,7 +48,7 @@ class ThenableTests: XCTestCase {
         enum E: Error { case dummy }
 
         let ex = expectation(description: "")
-        Promise(error: E.dummy).compactMap {
+        Promise6(error: E.dummy).compactMap {
             Int($0)
         }.catch {
             if case E.dummy = $0 {} else {
@@ -61,7 +61,7 @@ class ThenableTests: XCTestCase {
 
     func testPMKErrorCompactMap() {
         let ex = expectation(description: "")
-        Promise.value("a").compactMap {
+        Promise6.value("a").compactMap {
             Int($0)
         }.catch {
             if case PMKError.compactMap = $0 {} else {
@@ -74,7 +74,7 @@ class ThenableTests: XCTestCase {
 
     func testCompactMapValues() {
         let ex = expectation(description: "")
-        Promise.value(["1","2","a","4"]).compactMapValues {
+        Promise6.value(["1","2","a","4"]).compactMapValues {
             Int($0)
         }.done {
             XCTAssertEqual([1,2,4], $0)
@@ -85,8 +85,8 @@ class ThenableTests: XCTestCase {
 
     func testThenMap() {
         let ex = expectation(description: "")
-        Promise.value([1,2,3,4]).thenMap {
-            Promise.value($0)
+        Promise6.value([1,2,3,4]).thenMap {
+            Promise6.value($0)
         }.done {
             XCTAssertEqual([1,2,3,4], $0)
             ex.fulfill()
@@ -96,8 +96,8 @@ class ThenableTests: XCTestCase {
 
     func testThenFlatMap() {
         let ex = expectation(description: "")
-        Promise.value([1,2,3,4]).thenFlatMap {
-            Promise.value([$0, $0])
+        Promise6.value([1,2,3,4]).thenFlatMap {
+            Promise6.value([$0, $0])
         }.done {
             XCTAssertEqual([1,1,2,2,3,3,4,4], $0)
             ex.fulfill()
@@ -106,11 +106,11 @@ class ThenableTests: XCTestCase {
     }
 
     func testLastValueForEmpty() {
-        XCTAssertTrue(Promise.value([]).lastValue.isRejected)
+        XCTAssertTrue(Promise6.value([]).lastValue.isRejected)
     }
 
     func testFirstValueForEmpty() {
-        XCTAssertTrue(Promise.value([]).firstValue.isRejected)
+        XCTAssertTrue(Promise6.value([]).firstValue.isRejected)
     }
 
     func testThenOffRejected() {
@@ -118,7 +118,7 @@ class ThenableTests: XCTestCase {
         // extensive use of `done` in A+ tests since PMK 5
 
         let ex = expectation(description: "")
-        Promise<Int>(error: PMKError.badInput).then { x -> Promise<Int> in
+        Promise6<Int>(error: PMKError.badInput).then { x -> Promise6<Int> in
             XCTFail()
             return .value(x)
         }.catch { _ in
@@ -130,7 +130,7 @@ class ThenableTests: XCTestCase {
     func testBarrier() {
         let ex = expectation(description: "")
         let q = DispatchQueue(label: "\(#file):\(#line)", attributes: .concurrent)
-        Promise.value(1).done(on: q, flags: .barrier) {
+        Promise6.value(1).done(on: q, flags: .barrier) {
             XCTAssertEqual($0, 1)
             dispatchPrecondition(condition: .onQueueAsBarrier(q))
             ex.fulfill()
@@ -143,7 +143,7 @@ class ThenableTests: XCTestCase {
     func testDispatchFlagsSyntax() {
         let ex = expectation(description: "")
         let q = DispatchQueue(label: "\(#file):\(#line)", attributes: .concurrent)
-        Promise.value(1).done(on: q, flags: [.barrier, .inheritQoS]) {
+        Promise6.value(1).done(on: q, flags: [.barrier, .inheritQoS]) {
             XCTAssertEqual($0, 1)
             dispatchPrecondition(condition: .onQueueAsBarrier(q))
             ex.fulfill()

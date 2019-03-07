@@ -1,6 +1,6 @@
 @inline(__always)
-private func _race<U: Thenable>(_ thenables: [U]) -> Promise<U.T> {
-    let rp = Promise<U.T>(.pending)
+private func _race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
+    let rp = Promise6<U.T>(.pending)
     for thenable in thenables {
         thenable.pipe(to: rp.box.seal)
     }
@@ -17,7 +17,7 @@ private func _race<U: Thenable>(_ thenables: [U]) -> Promise<U.T> {
  - Returns: The promise that resolves first
  - Warning: If the first resolution is a rejection, the returned promise is rejected
 */
-public func race<U: Thenable>(_ thenables: U...) -> Promise<U.T> {
+public func race<U: Thenable>(_ thenables: U...) -> Promise6<U.T> {
     return _race(thenables)
 }
 
@@ -32,9 +32,9 @@ public func race<U: Thenable>(_ thenables: U...) -> Promise<U.T> {
  - Warning: If the first resolution is a rejection, the returned promise is rejected
  - Remark: If the provided array is empty the returned promise is rejected with PMKError.badInput
 */
-public func race<U: Thenable>(_ thenables: [U]) -> Promise<U.T> {
+public func race<U: Thenable>(_ thenables: [U]) -> Promise6<U.T> {
     guard !thenables.isEmpty else {
-        return Promise(error: PMKError.badInput)
+        return Promise6(error: PMKError.badInput)
     }
     return _race(thenables)
 }

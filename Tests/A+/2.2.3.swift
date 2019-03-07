@@ -36,7 +36,7 @@ class Test223: XCTestCase {
             describe("2.2.3.3: it must not be called more than once.") {
                 specify("already-rejected") { d, expectation in
                     var timesCalled = 0
-                    Promise<Int>(error: Error.dummy).catch { _ in
+                    Promise6<Int>(error: Error.dummy).catch { _ in
                         XCTAssertEqual(++timesCalled, 1)
                     }
                     after(ticks: 2) {

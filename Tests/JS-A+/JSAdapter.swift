@@ -17,7 +17,7 @@ enum JSAdapter {
     
     static let rejected: @convention(block) (JSValue) -> JSPromise = { reason in
         let error = JSUtils.JSError(reason: reason)
-        let promise = Promise<JSValue>(error: error)
+        let promise = Promise6<JSValue>(error: error)
         return JSPromise(promise: promise)
     }
     
@@ -29,7 +29,7 @@ enum JSAdapter {
             fatalError("Couldn't create object")
         }
         
-        let pendingPromise = Promise<JSValue>.pending()
+        let pendingPromise = Promise6<JSValue>.pending()
         let jsPromise = JSPromise(promise: pendingPromise.promise)
         
         // promise

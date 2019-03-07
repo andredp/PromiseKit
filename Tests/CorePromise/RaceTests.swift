@@ -4,7 +4,7 @@ import PromiseKit
 class RaceTests: XCTestCase {
     func test1() {
         let ex = expectation(description: "")
-        race(after(.milliseconds(10)).then{ Promise.value(1) }, after(seconds: 1).map{ 2 }).done { index in
+        race(after(.milliseconds(10)).then{ Promise6.value(1) }, after(seconds: 1).map{ 2 }).done { index in
             XCTAssertEqual(index, 1)
             ex.fulfill()
         }.silenceWarning()
@@ -41,7 +41,7 @@ class RaceTests: XCTestCase {
 
     func testEmptyArray() {
         let ex = expectation(description: "")
-        let empty = [Promise<Int>]()
+        let empty = [Promise6<Int>]()
         race(empty).catch {
             guard case PMKError.badInput = $0 else { return XCTFail() }
             ex.fulfill()

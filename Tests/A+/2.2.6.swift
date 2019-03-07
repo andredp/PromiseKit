@@ -180,7 +180,7 @@ class Test226: XCTestCase {
                             exes[1].fulfill()
                         }
                         promise.done { _ in XCTFail() }.silenceWarning()
-                        promise.recover { err -> Promise<UInt32> in
+                        promise.recover { err -> Promise6<UInt32> in
                             if case Error.sentinel(let x) = err {
                                 XCTAssertEqual(x, sentinel)
                             } else {
@@ -211,7 +211,7 @@ class Test226: XCTestCase {
                             exes[0].fulfill()
                         }
 
-                        promise.recover { _ -> Promise<UInt32> in
+                        promise.recover { _ -> Promise6<UInt32> in
                             throw Error.sentinel(sentinel2)
                         }.catch { err in
                             if case Error.sentinel(let x) = err, x == sentinel2 {

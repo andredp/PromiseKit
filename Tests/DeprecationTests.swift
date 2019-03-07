@@ -78,14 +78,14 @@ class DeprecationTests: XCTestCase {
 
     func testAlways() {
         let ex = expectation(description: "")
-        Promise.value(1).always(execute: ex.fulfill)
+        Promise6.value(1).always(execute: ex.fulfill)
         wait(for: [ex], timeout: 10)
     }
 
 #if PMKFullDeprecations
     func testFlatMap() {
         let ex = expectation(description: "")
-        Promise.value(1).flatMap { _ -> Int? in
+        Promise6.value(1).flatMap { _ -> Int? in
             nil
         }.catch {
             //TODO should be `flatMap`, but how to enact that without causing
@@ -98,7 +98,7 @@ class DeprecationTests: XCTestCase {
 
     func testSequenceMap() {
         let ex = expectation(description: "")
-        Promise.value([1, 2]).map {
+        Promise6.value([1, 2]).map {
             $0 + 1
         }.done {
             XCTAssertEqual($0, [2, 3])
@@ -109,7 +109,7 @@ class DeprecationTests: XCTestCase {
 
     func testSequenceFlatMap() {
         let ex = expectation(description: "")
-        Promise.value([1, 2]).flatMap {
+        Promise6.value([1, 2]).flatMap {
             [$0 + 1, $0 + 2]
         }.done {
             XCTAssertEqual($0, [2, 3, 3, 4])
@@ -121,7 +121,7 @@ class DeprecationTests: XCTestCase {
 
     func testSequenceFilter() {
         let ex = expectation(description: "")
-        Promise.value([0, 1, 2, 3]).filter {
+        Promise6.value([0, 1, 2, 3]).filter {
             $0 < 2
         }.done {
             XCTAssertEqual($0, [0, 1])
@@ -132,7 +132,7 @@ class DeprecationTests: XCTestCase {
 
     func testSorted() {
         let ex = expectation(description: "")
-        Promise.value([5, 2, 1, 8]).sorted().done {
+        Promise6.value([5, 2, 1, 8]).sorted().done {
             XCTAssertEqual($0, [1,2,5,8])
             ex.fulfill()
         }
@@ -140,11 +140,11 @@ class DeprecationTests: XCTestCase {
     }
 
     func testFirst() {
-        XCTAssertEqual(Promise.value([1,2]).first.value, 1)
+        XCTAssertEqual(Promise6.value([1,2]).first.value, 1)
     }
 
     func testLast() {
-        XCTAssertEqual(Promise.value([1,2]).last.value, 2)
+        XCTAssertEqual(Promise6.value([1,2]).last.value, 2)
     }
 
     func testPMKErrorFlatMap() {
@@ -153,6 +153,6 @@ class DeprecationTests: XCTestCase {
 }
 
 
-extension Promise {
+extension Promise6 {
     func silenceWarning() {}
 }

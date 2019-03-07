@@ -39,7 +39,7 @@ class WrapTests: XCTestCase {
     func testSuccess() {
         let ex = expectation(description: "")
         let kittenFetcher = KittenFetcher(value: 2, error: nil)
-        Promise { seal in
+        Promise6 { seal in
             kittenFetcher.fetchWithCompletionBlock(block: seal.resolve)
         }.done {
             XCTAssertEqual($0, 2)
@@ -53,7 +53,7 @@ class WrapTests: XCTestCase {
         let ex = expectation(description: "")
 
         let kittenFetcher = KittenFetcher(value: nil, error: Error.test)
-        Promise { seal in
+        Promise6 { seal in
             kittenFetcher.fetchWithCompletionBlock(block: seal.resolve)
         }.catch { error in
             defer { ex.fulfill() }
@@ -69,7 +69,7 @@ class WrapTests: XCTestCase {
         let ex = expectation(description: "")
 
         let kittenFetcher = KittenFetcher(value: nil, error: nil)
-        Promise { seal in
+        Promise6 { seal in
             kittenFetcher.fetchWithCompletionBlock(block: seal.resolve)
         }.catch { error in
             defer { ex.fulfill() }
@@ -84,7 +84,7 @@ class WrapTests: XCTestCase {
     func testInvertedCallingConvention() {
         let ex = expectation(description: "")
         let kittenFetcher = KittenFetcher(value: 2, error: nil)
-        Promise { seal in
+        Promise6 { seal in
             kittenFetcher.fetchWithCompletionBlock2(block: seal.resolve)
         }.done {
             XCTAssertEqual($0, 2)
@@ -98,7 +98,7 @@ class WrapTests: XCTestCase {
     func testNonOptionalFirstParameter() {
         let ex1 = expectation(description: "")
         let kf1 = KittenFetcher(value: 2, error: nil)
-        Promise { seal in
+        Promise6 { seal in
             kf1.fetchWithCompletionBlock3(block: seal.resolve)
         }.done {
             XCTAssertEqual($0, 2)
@@ -107,7 +107,7 @@ class WrapTests: XCTestCase {
 
         let ex2 = expectation(description: "")
         let kf2 = KittenFetcher(value: -100, error: Error.test)
-        Promise { seal in
+        Promise6 { seal in
             kf2.fetchWithCompletionBlock3(block: seal.resolve)
         }.catch { _ in ex2.fulfill() }
 
@@ -118,13 +118,13 @@ class WrapTests: XCTestCase {
     func testVoidCompletionValue() {
         let ex1 = expectation(description: "")
         let kf1 = KittenFetcher(value: nil, error: nil)
-        Promise { seal in
+        Promise6 { seal in
             kf1.fetchWithCompletionBlock4(block: seal.resolve)
         }.done(ex1.fulfill).silenceWarning()
 
         let ex2 = expectation(description: "")
         let kf2 = KittenFetcher(value: nil, error: Error.test)
-        Promise { seal in
+        Promise6 { seal in
             kf2.fetchWithCompletionBlock4(block: seal.resolve)
         }.catch { _ in ex2.fulfill() }
 
@@ -133,8 +133,8 @@ class WrapTests: XCTestCase {
 #endif
 
     func testIsFulfilled() {
-        XCTAssertTrue(Promise.value(()).result?.isFulfilled ?? false)
-        XCTAssertFalse(Promise<Int>(error: Error.test).result?.isFulfilled ?? true)
+        XCTAssertTrue(Promise6.value(()).result?.isFulfilled ?? false)
+        XCTAssertFalse(Promise6<Int>(error: Error.test).result?.isFulfilled ?? true)
     }
 
     func testPendingPromiseDeallocated() {
@@ -143,7 +143,7 @@ class WrapTests: XCTestCase {
         // BUT putting a breakpoint in the deinit CLEARLY shows it getting covered…
 
         class Foo {
-            let p = Promise<Void>.pending()
+            let p = Promise6<Void>.pending()
             var ex: XCTestExpectation!
 
             deinit {
@@ -161,9 +161,9 @@ class WrapTests: XCTestCase {
     }
 
     func testVoidResolverFulfillAmbiguity() {
-    #if !swift(>=5) && swift(>=4.1) || swift(>=3.3) && !swift(>=4.0)
-    // ^^ this doesn’t work with Swift < 3.3 for some reason
-    // ^^ this doesn’t work with Swift 5.0-beta1 for some reason
+        #if !swift(>=5) && swift(>=4.1) || swift(>=3.3) && !swift(>=4.0)
+        // ^^ this doesn’t work with Swift < 3.3 for some reason
+        // ^^ this doesn’t work with Swift 5.0-beta1 for some reason
 
         // reference: https://github.com/mxcl/PromiseKit/issues/990
 
@@ -171,8 +171,8 @@ class WrapTests: XCTestCase {
             success()
         }
 
-        func bar() -> Promise<Void> {
-            return Promise<Void> { (seal: Resolver<Void>) in
+        func bar() -> Promise6<Void> {
+            return Promise6<Void> { (seal: Resolver<Void>) in
                 foo(success: seal.fulfill, failure: seal.reject)
             }
         }
@@ -180,7 +180,7 @@ class WrapTests: XCTestCase {
         let ex = expectation(description: "")
         bar().done(ex.fulfill).cauterize()
         wait(for: [ex], timeout: 10)
-    #endif
+        #endif
     }
 }
 

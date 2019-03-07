@@ -64,7 +64,7 @@ class LoggingTests: XCTestCase {
         conf.logHandler = { event in
             logOutput = "\(event)"
         }
-        let promiseResolver = Promise<String>.pending()
+        let promiseResolver = Promise6<String>.pending()
         let workQueue = DispatchQueue(label: "worker")
         workQueue.async {
             promiseResolver.resolver.fulfill ("PromiseFulfilled")
@@ -92,8 +92,8 @@ class LoggingTests: XCTestCase {
                 logOutput = "cauterized"
             }
         }
-        func createPromise() -> Promise<String> {
-            let promiseResolver = Promise<String>.pending()
+        func createPromise() -> Promise6<String> {
+            let promiseResolver = Promise6<String>.pending()
             
             let queue = DispatchQueue(label: "workQueue")
             queue.async {
@@ -169,7 +169,7 @@ class LoggingTests: XCTestCase {
             }
         }
         do {
-            let _ = Promise<Int>.pending()
+            let _ = Promise6<Int>.pending()
         }
         XCTAssertEqual ("pendingPromiseDeallocated", logOutput!)
     }

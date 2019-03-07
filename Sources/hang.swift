@@ -12,7 +12,7 @@ import CoreFoundation
  - Throws: An error, should the promise be rejected
  - See: `wait()`
 */
-public func hang<T>(_ promise: Promise<T>) throws -> T {
+public func hang<T>(_ promise: Promise6<T>) throws -> T {
 #if os(Linux) || os(Android)
     // isMainThread is not yet implemented on Linux.
     let runLoopModeRaw = RunLoopMode.defaultRunLoopMode.rawValue._bridgeToObjectiveC()

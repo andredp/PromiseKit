@@ -1,6 +1,6 @@
 import PromiseKit
 
-extension Promise {
+extension Promise6 {
     func silenceWarning() {}
 }
 

@@ -5,7 +5,7 @@ class HangTests: XCTestCase {
     func test() {
         let ex = expectation(description: "block executed")
         do {
-            let value = try hang(after(seconds: 0.02).then { _ -> Promise<Int> in
+            let value = try hang(after(seconds: 0.02).then { _ -> Promise6<Int> in
                 ex.fulfill()
                 return .value(1)
             })

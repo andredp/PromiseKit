@@ -5,7 +5,7 @@ import Dispatch
  A `Promise` is a functional abstraction around a failable asynchronous operation.
  - See: `Thenable`
  */
-public final class Promise<T>: Thenable, CatchMixin {
+public final class Promise6<T>: Thenable, CatchMixin {
     let box: Box<Result<T>>
 
     fileprivate init(box: SealedBox<Result<T>>) {
@@ -38,8 +38,8 @@ public final class Promise<T>: Thenable, CatchMixin {
               return .value(bar)
           }
      */
-    public class func value(_ value: T) -> Promise<T> {
-        return Promise(box: SealedBox(value: .fulfilled(value)))
+    public class func value(_ value: T) -> Promise6<T> {
+        return Promise6(box: SealedBox(value: .fulfilled(value)))
     }
 
     /// Initialize a new rejected promise.
@@ -65,8 +65,8 @@ public final class Promise<T>: Thenable, CatchMixin {
     }
 
     /// - Returns: a tuple of a new pending promise and its `Resolver`.
-    public class func pending() -> (promise: Promise<T>, resolver: Resolver<T>) {
-        return { ($0, Resolver($0.box)) }(Promise<T>(.pending))
+    public class func pending() -> (promise: Promise6<T>, resolver: Resolver<T>) {
+        return { ($0, Resolver($0.box)) }(Promise6<T>(.pending))
     }
 
     /// - See: `Thenable.pipe`
@@ -101,7 +101,7 @@ public final class Promise<T>: Thenable, CatchMixin {
     }
 }
 
-public extension Promise {
+public extension Promise6 {
     /**
      Blocks this thread, so—you know—don’t call this on a serial thread that
      any part of your chain may use. Like the main thread for example.
@@ -131,7 +131,7 @@ public extension Promise {
 }
 
 #if swift(>=3.1)
-extension Promise where T == Void {
+extension Promise6 where T == Void {
     /// Initializes a new promise fulfilled with `Void`
     public convenience init() {
         self.init(box: SealedBox(value: .fulfilled(Void())))
@@ -155,8 +155,8 @@ public extension DispatchQueue {
      - Note: There is no Promise/Thenable version of this due to Swift compiler ambiguity issues.
      */
     @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)
-    final func async<T>(_: PMKNamespacer, group: DispatchGroup? = nil, qos: DispatchQoS = .default, flags: DispatchWorkItemFlags = [], execute body: @escaping () throws -> T) -> Promise<T> {
-        let promise = Promise<T>(.pending)
+    final func async<T>(_: PMKNamespacer, group: DispatchGroup? = nil, qos: DispatchQoS = .default, flags: DispatchWorkItemFlags = [], execute body: @escaping () throws -> T) -> Promise6<T> {
+        let promise = Promise6<T>(.pending)
         async(group: group, qos: qos, flags: flags) {
             do {
                 promise.box.seal(.fulfilled(try body()))

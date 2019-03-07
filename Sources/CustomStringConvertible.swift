@@ -1,5 +1,5 @@
 
-extension Promise: CustomStringConvertible {
+extension Promise6: CustomStringConvertible {
     /// - Returns: A description of the state of this promise.
     public var description: String {
         switch result {
@@ -13,7 +13,7 @@ extension Promise: CustomStringConvertible {
     }
 }
 
-extension Promise: CustomDebugStringConvertible {
+extension Promise6: CustomDebugStringConvertible {
     /// - Returns: A debug-friendly description of the state of this promise.
     public var debugDescription: String {
         switch box.inspect() {

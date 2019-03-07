@@ -4,21 +4,21 @@ import PromiseKit
 class ZalgoTests: XCTestCase {
     func test1() {
         var resolved = false
-        Promise.value(1).done(on: nil) { _ in
+        Promise6.value(1).done(on: nil) { _ in
             resolved = true
         }.silenceWarning()
         XCTAssertTrue(resolved)
     }
 
     func test2() {
-        let p1 = Promise.value(1).map(on: nil) { x in
+        let p1 = Promise6.value(1).map(on: nil) { x in
             return 2
         }
         XCTAssertEqual(p1.value!, 2)
         
         var x = 0
         
-        let (p2, seal) = Promise<Int>.pending()
+        let (p2, seal) = Promise6<Int>.pending()
         p2.done(on: nil) { _ in
             x = 1
         }.silenceWarning()
@@ -32,8 +32,8 @@ class ZalgoTests: XCTestCase {
     func test3() {
         let ex = (expectation(description: ""), expectation(description: ""))
 
-        var p1: Promise<Void>!
-        p1 = after(.milliseconds(100)).then(on: nil) { _ -> Promise<Void> in
+        var p1: Promise6<Void>!
+        p1 = after(.milliseconds(100)).then(on: nil) { _ -> Promise6<Void> in
             ex.0.fulfill()
             return p1
         }
@@ -49,8 +49,8 @@ class ZalgoTests: XCTestCase {
     // return a sealed promise from its own zalgo’d then handler doesn’t hang
     func test4() {
         let ex = expectation(description: "")
-        let p1 = Promise.value(1)
-        p1.then(on: nil) { _ -> Promise<Int> in
+        let p1 = Promise6.value(1)
+        p1.then(on: nil) { _ -> Promise6<Int> in
             ex.fulfill()
             return p1
         }.silenceWarning()

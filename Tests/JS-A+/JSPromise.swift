@@ -16,18 +16,18 @@ import JavaScriptCore
 
 class JSPromise: NSObject, JSPromiseProtocol {
     
-    let promise: Promise<JSValue>
+    let promise: Promise6<JSValue>
     
-    init(promise: Promise<JSValue>) {
+    init(promise: Promise6<JSValue>) {
         self.promise = promise
     }
     
     func then(_ onFulfilled: JSValue, _ onRejected: JSValue) -> JSPromise {
         
         // Keep a reference to the returned promise so we can comply to 2.3.1
-        var returnedPromiseRef: Promise<JSValue>?
+        var returnedPromiseRef: Promise6<JSValue>?
         
-        let afterFulfill = promise.then { value -> Promise<JSValue> in
+        let afterFulfill = promise.then { value -> Promise6<JSValue> in
             
             // 2.2.1: ignored if not a function
             guard JSUtils.isFunction(value: onFulfilled) else {
@@ -53,7 +53,7 @@ class JSPromise: NSObject, JSPromiseProtocol {
             }
         }
         
-        let afterReject = promise.recover { error -> Promise<JSValue> in
+        let afterReject = promise.recover { error -> Promise6<JSValue> in
             
             // 2.2.1: ignored if not a function
             guard let jsError = error as? JSUtils.JSError, JSUtils.isFunction(value: onRejected) else {
@@ -79,9 +79,9 @@ class JSPromise: NSObject, JSPromiseProtocol {
             }
         }
         
-        let newPromise = Promise<Result<JSValue>> { resolver in
+        let newPromise = Promise6<Result<JSValue>> { resolver in
             _ = promise.tap(resolver.fulfill)
-        }.then(on: nil) { result -> Promise<JSValue> in
+        }.then(on: nil) { result -> Promise6<JSValue> in
             switch result {
             case .fulfilled: return afterFulfill
             case .rejected: return afterReject

@@ -19,7 +19,7 @@ class Test227: XCTestCase {
 
                 testRejected { promise1, expectation, _ in
                     let sentinel = arc4random()
-                    let promise2 = promise1.recover { _ -> Promise<UInt32> in throw Error.sentinel(sentinel) }
+                    let promise2 = promise1.recover { _ -> Promise6<UInt32> in throw Error.sentinel(sentinel) }
 
                     promise2.catch { error in
                         if case Error.sentinel(let x) = error, x == sentinel {

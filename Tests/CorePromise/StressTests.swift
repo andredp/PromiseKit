@@ -58,12 +58,12 @@ private enum Error: Swift.Error {
     case Dummy
 }
 
-private func stressDataRace<T: Equatable>(expectation e1: XCTestExpectation, iterations: Int = 1000, stressFactor: Int = 10, stressFunction: @escaping (Promise<T>) -> Void, fulfill f: @escaping () -> T) {
+private func stressDataRace<T: Equatable>(expectation e1: XCTestExpectation, iterations: Int = 1000, stressFactor: Int = 10, stressFunction: @escaping (Promise6<T>) -> Void, fulfill f: @escaping () -> T) {
     let group = DispatchGroup()
     let queue = DispatchQueue(label: "the.domain.of.Zalgo", attributes: .concurrent)
 
     for _ in 0..<iterations {
-        let (promise, seal) = Promise<T>.pending()
+        let (promise, seal) = Promise6<T>.pending()
 
         DispatchQueue.concurrentPerform(iterations: stressFactor) { n in
             stressFunction(promise)

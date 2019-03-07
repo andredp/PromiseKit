@@ -21,9 +21,9 @@ extension XCTestCase {
         }
     }
 
-    func specify(_ description: String, file: StaticString = #file, line: UInt = #line, body: ((promise: Promise<Void>, fulfill: () -> Void, reject: (Error) -> Void), XCTestExpectation) throws -> Void) {
+    func specify(_ description: String, file: StaticString = #file, line: UInt = #line, body: ((promise: Promise6<Void>, fulfill: () -> Void, reject: (Error) -> Void), XCTestExpectation) throws -> Void) {
         let expectation = self.expectation(description: description)
-        let (pending, seal) = Promise<Void>.pending()
+        let (pending, seal) = Promise6<Void>.pending()
 
         do {
             try body((pending, seal.fulfill_, seal.reject), expectation)
@@ -37,19 +37,19 @@ extension XCTestCase {
         }
     }
 
-    func testFulfilled(file: StaticString = #file, line: UInt = #line, body: @escaping (Promise<UInt32>, XCTestExpectation, UInt32) -> Void) {
+    func testFulfilled(file: StaticString = #file, line: UInt = #line, body: @escaping (Promise6<UInt32>, XCTestExpectation, UInt32) -> Void) {
         testFulfilled(withExpectationCount: 1, file: file, line: line) {
             body($0, $1.first!, $2)
         }
     }
 
-    func testRejected(file: StaticString = #file, line: UInt = #line, body: @escaping (Promise<UInt32>, XCTestExpectation, UInt32) -> Void) {
+    func testRejected(file: StaticString = #file, line: UInt = #line, body: @escaping (Promise6<UInt32>, XCTestExpectation, UInt32) -> Void) {
         testRejected(withExpectationCount: 1, file: file, line: line) {
             body($0, $1.first!, $2)
         }
     }
 
-    func testFulfilled(withExpectationCount: Int, file: StaticString = #file, line: UInt = #line, body: @escaping (Promise<UInt32>, [XCTestExpectation], UInt32) -> Void) {
+    func testFulfilled(withExpectationCount: Int, file: StaticString = #file, line: UInt = #line, body: @escaping (Promise6<UInt32>, [XCTestExpectation], UInt32) -> Void) {
 
         let specify = mkspecify(withExpectationCount, file: file, line: line, body: body)
 
@@ -57,13 +57,13 @@ extension XCTestCase {
             return (.value(value), {})
         }
         specify("immediately-fulfilled") { value in
-            let (promise, seal) = Promise<UInt32>.pending()
+            let (promise, seal) = Promise6<UInt32>.pending()
             return (promise, {
                 seal.fulfill(value)
             })
         }
         specify("eventually-fulfilled") { value in
-            let (promise, seal) = Promise<UInt32>.pending()
+            let (promise, seal) = Promise6<UInt32>.pending()
             return (promise, {
                 after(ticks: 5) {
                     seal.fulfill(value)
@@ -72,21 +72,21 @@ extension XCTestCase {
         }
     }
 
-    func testRejected(withExpectationCount: Int, file: StaticString = #file, line: UInt = #line, body: @escaping (Promise<UInt32>, [XCTestExpectation], UInt32) -> Void) {
+    func testRejected(withExpectationCount: Int, file: StaticString = #file, line: UInt = #line, body: @escaping (Promise6<UInt32>, [XCTestExpectation], UInt32) -> Void) {
 
         let specify = mkspecify(withExpectationCount, file: file, line: line, body: body)
 
         specify("already-rejected") { sentinel in
-            return (Promise(error: Error.sentinel(sentinel)), {})
+            return (Promise6(error: Error.sentinel(sentinel)), {})
         }
         specify("immediately-rejected") { sentinel in
-            let (promise, seal) = Promise<UInt32>.pending()
+            let (promise, seal) = Promise6<UInt32>.pending()
             return (promise, {
                 seal.reject(Error.sentinel(sentinel))
             })
         }
         specify("eventually-rejected") { sentinel in
-            let (promise, seal) = Promise<UInt32>.pending()
+            let (promise, seal) = Promise6<UInt32>.pending()
             return (promise, {
                 after(ticks: 50) {
                     seal.reject(Error.sentinel(sentinel))
@@ -98,7 +98,7 @@ extension XCTestCase {
 
 /////////////////////////////////////////////////////////////////////////
 
-    private func mkspecify(_ numberOfExpectations: Int, file: StaticString, line: UInt, body: @escaping (Promise<UInt32>, [XCTestExpectation], UInt32) -> Void) -> (String, _ feed: (UInt32) -> (Promise<UInt32>, () -> Void)) -> Void {
+    private func mkspecify(_ numberOfExpectations: Int, file: StaticString, line: UInt, body: @escaping (Promise6<UInt32>, [XCTestExpectation], UInt32) -> Void) -> (String, _ feed: (UInt32) -> (Promise6<UInt32>, () -> Void)) -> Void {
         return { desc, feed in
             let value = arc4random()
             let (promise, executeAfter) = feed(value)
@@ -139,7 +139,7 @@ func after(ticks: Int, execute body: @escaping () -> Void) {
     f()
 }
 
-extension Promise {
+extension Promise6 {
     func test(onFulfilled: @escaping () -> Void, onRejected: @escaping () -> Void) {
         tap { result in
             switch result {
@@ -157,7 +157,7 @@ prefix func ++(a: inout Int) -> Int {
     return a
 }
 
-extension Promise {
+extension Promise6 {
     func silenceWarning() {}
 }
 

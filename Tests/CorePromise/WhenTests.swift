@@ -6,7 +6,7 @@ class WhenTests: XCTestCase {
 
     func testEmpty() {
         let e1 = expectation(description: "")
-        let promises: [Promise<Void>] = []
+        let promises: [Promise6<Void>] = []
         when(fulfilled: promises).done { _ in
             e1.fulfill()
         }.silenceWarning()
@@ -21,10 +21,10 @@ class WhenTests: XCTestCase {
 
     func testInt() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1)
-        let p2 = Promise.value(2)
-        let p3 = Promise.value(3)
-        let p4 = Promise.value(4)
+        let p1 = Promise6.value(1)
+        let p2 = Promise6.value(2)
+        let p3 = Promise6.value(3)
+        let p4 = Promise6.value(4)
 
         when(fulfilled: [p1, p2, p3, p4]).done { x in
             XCTAssertEqual(x[0], 1)
@@ -39,8 +39,8 @@ class WhenTests: XCTestCase {
 
     func testDoubleTuple() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1)
-        let p2 = Promise.value("abc")
+        let p1 = Promise6.value(1)
+        let p2 = Promise6.value("abc")
         when(fulfilled: p1, p2).done{ x, y in
             XCTAssertEqual(x, 1)
             XCTAssertEqual(y, "abc")
@@ -51,9 +51,9 @@ class WhenTests: XCTestCase {
 
     func testTripleTuple() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1)
-        let p2 = Promise.value("abc")
-        let p3 = Promise.value(     1.0)
+        let p1 = Promise6.value(1)
+        let p2 = Promise6.value("abc")
+        let p3 = Promise6.value(     1.0)
         when(fulfilled: p1, p2, p3).done { u, v, w in
             XCTAssertEqual(1, u)
             XCTAssertEqual("abc", v)
@@ -65,10 +65,10 @@ class WhenTests: XCTestCase {
 
     func testQuadrupleTuple() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1)
-        let p2 = Promise.value("abc")
-        let p3 = Promise.value(1.0)
-        let p4 = Promise.value(true)
+        let p1 = Promise6.value(1)
+        let p2 = Promise6.value("abc")
+        let p3 = Promise6.value(1.0)
+        let p4 = Promise6.value(true)
         when(fulfilled: p1, p2, p3, p4).done { u, v, w, x in
             XCTAssertEqual(1, u)
             XCTAssertEqual("abc", v)
@@ -81,11 +81,11 @@ class WhenTests: XCTestCase {
 
     func testQuintupleTuple() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1)
-        let p2 = Promise.value("abc")
-        let p3 = Promise.value(1.0)
-        let p4 = Promise.value(true)
-        let p5 = Promise.value("a" as Character)
+        let p1 = Promise6.value(1)
+        let p2 = Promise6.value("abc")
+        let p3 = Promise6.value(1.0)
+        let p4 = Promise6.value(true)
+        let p5 = Promise6.value("a" as Character)
         when(fulfilled: p1, p2, p3, p4, p5).done { u, v, w, x, y in
             XCTAssertEqual(1, u)
             XCTAssertEqual("abc", v)
@@ -99,10 +99,10 @@ class WhenTests: XCTestCase {
 
     func testVoid() {
         let e1 = expectation(description: "")
-        let p1 = Promise.value(1).done { _ in }
-        let p2 = Promise.value(2).done { _ in }
-        let p3 = Promise.value(3).done { _ in }
-        let p4 = Promise.value(4).done { _ in }
+        let p1 = Promise6.value(1).done { _ in }
+        let p2 = Promise6.value(2).done { _ in }
+        let p3 = Promise6.value(3).done { _ in }
+        let p4 = Promise6.value(4).done { _ in }
 
         when(fulfilled: p1, p2, p3, p4).done(e1.fulfill).silenceWarning()
 
@@ -114,8 +114,8 @@ class WhenTests: XCTestCase {
 
         let e1 = expectation(description: "")
         let p1 = after(.milliseconds(100)).map{ true }
-        let p2: Promise<Bool> = after(.milliseconds(200)).map{ throw Error.dummy }
-        let p3 = Promise.value(false)
+        let p2: Promise6<Bool> = after(.milliseconds(200)).map{ throw Error.dummy }
+        let p3 = Promise6.value(false)
             
         when(fulfilled: p1, p2, p3).catch { _ in
             e1.fulfill()
@@ -194,7 +194,7 @@ class WhenTests: XCTestCase {
         }
 
         let ex = expectation(description: "")
-        let p1 = Promise<Void>(error: Error.test)
+        let p1 = Promise6<Void>(error: Error.test)
         let p2 = after(.milliseconds(100))
         when(fulfilled: p1, p2).done{ _ in XCTFail() }.catch { error in
             XCTAssertTrue(error as? Error == Error.test)
@@ -214,7 +214,7 @@ class WhenTests: XCTestCase {
         let ex2 = expectation(description: "")
         let ex3 = expectation(description: "")
 
-        let p1 = Promise<Void>(error: Error.test)
+        let p1 = Promise6<Void>(error: Error.test)
         let p2 = after(.milliseconds(100)).done { throw Error.straggler }
         let p3 = after(.milliseconds(200)).done { throw Error.straggler }
 
@@ -237,9 +237,9 @@ class WhenTests: XCTestCase {
         }
 
         let ex = expectation(description: "")
-        let p1 = Promise<Void>(error: Error.test1)
-        let p2 = Promise<Void>(error: Error.test2)
-        let p3 = Promise<Void>(error: Error.test3)
+        let p1 = Promise6<Void>(error: Error.test1)
+        let p2 = Promise6<Void>(error: Error.test2)
+        let p3 = Promise6<Void>(error: Error.test3)
 
         when(fulfilled: p1, p2, p3).catch { error in
             XCTAssertTrue(error as? Error == Error.test1)

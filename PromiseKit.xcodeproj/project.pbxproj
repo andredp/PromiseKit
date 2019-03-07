@@ -51,7 +51,7 @@
 		635D642B1D59635300BC0AF5 /* StressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D64161D59635300BC0AF5 /* StressTests.swift */; };
 		635D642C1D59635300BC0AF5 /* RegressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D64171D59635300BC0AF5 /* RegressionTests.swift */; };
 		635D64301D596E8500BC0AF5 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B0AC571D595E1B00FA21D9 /* PromiseKit.framework */; };
-		636A291A1F1C156B001229C2 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29191F1C156B001229C2 /* Promise.swift */; };
+		636A291A1F1C156B001229C2 /* Promise6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29191F1C156B001229C2 /* Promise6.swift */; };
 		636A291F1F1C16FF001229C2 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A291E1F1C16FF001229C2 /* Box.swift */; };
 		636A29211F1C1716001229C2 /* Thenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29201F1C1716001229C2 /* Thenable.swift */; };
 		636A29231F1C17A6001229C2 /* Guarantee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A29221F1C17A6001229C2 /* Guarantee.swift */; };
@@ -191,7 +191,7 @@
 		635D64171D59635300BC0AF5 /* RegressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegressionTests.swift; sourceTree = "<group>"; };
 		635D641B1D59635300BC0AF5 /* DefaultDispatchQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDispatchQueueTests.swift; sourceTree = "<group>"; };
 		63648C94203CB97400EBA011 /* DeprecationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeprecationTests.swift; path = Tests/DeprecationTests.swift; sourceTree = "<group>"; };
-		636A29191F1C156B001229C2 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Sources/Promise.swift; sourceTree = "<group>"; };
+		636A29191F1C156B001229C2 /* Promise6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Promise6.swift; path = Sources/Promise6.swift; sourceTree = "<group>"; };
 		636A291E1F1C16FF001229C2 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Box.swift; path = Sources/Box.swift; sourceTree = "<group>"; };
 		636A29201F1C1716001229C2 /* Thenable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Thenable.swift; path = Sources/Thenable.swift; sourceTree = "<group>"; };
 		636A29221F1C17A6001229C2 /* Guarantee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Guarantee.swift; path = Sources/Guarantee.swift; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 		63B0AC601D595E4C00FA21D9 /* Sources.swift */ = {
 			isa = PBXGroup;
 			children = (
-				636A29191F1C156B001229C2 /* Promise.swift */,
+				636A29191F1C156B001229C2 /* Promise6.swift */,
 				636A29221F1C17A6001229C2 /* Guarantee.swift */,
 				636A29201F1C1716001229C2 /* Thenable.swift */,
 				632FBBE21F33B273008F8FBB /* Catchable.swift */,
@@ -649,6 +649,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -757,7 +758,7 @@
 				636A291F1F1C16FF001229C2 /* Box.swift in Sources */,
 				63B0AC821D595E6300FA21D9 /* AnyPromise.m in Sources */,
 				636A29231F1C17A6001229C2 /* Guarantee.swift in Sources */,
-				636A291A1F1C156B001229C2 /* Promise.swift in Sources */,
+				636A291A1F1C156B001229C2 /* Promise6.swift in Sources */,
 				63B0AC8B1D595E6300FA21D9 /* join.m in Sources */,
 				63B0AC891D595E6300FA21D9 /* hang.m in Sources */,
 				63B0AC831D595E6300FA21D9 /* AnyPromise.swift in Sources */,

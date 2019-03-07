@@ -23,13 +23,13 @@ import Dispatch
 
  - Note: the block you pass excecutes immediately on the current thread/queue.
  */
-public func firstly<U: Thenable>(execute body: () throws -> U) -> Promise<U.T> {
+public func firstly<U: Thenable>(execute body: () throws -> U) -> Promise6<U.T> {
     do {
-        let rp = Promise<U.T>(.pending)
+        let rp = Promise6<U.T>(.pending)
         try body().pipe(to: rp.box.seal)
         return rp
     } catch {
-        return Promise(error: error)
+        return Promise6(error: error)
     }
 }
 

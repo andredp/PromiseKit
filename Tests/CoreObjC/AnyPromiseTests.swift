@@ -3,7 +3,7 @@ import XCTest
 
 class AnyPromiseTests: XCTestCase {
     func testFulfilledResult() {
-        switch AnyPromise(Promise.value(true)).result {
+        switch AnyPromise(Promise6.value(true)).result {
         case .fulfilled(let obj as Bool)? where obj:
             break
         default:
@@ -12,7 +12,7 @@ class AnyPromiseTests: XCTestCase {
     }
 
     func testRejectedResult() {
-        switch AnyPromise(Promise<Int>(error: PMKError.badInput)).result {
+        switch AnyPromise(Promise6<Int>(error: PMKError.badInput)).result {
         case .rejected(let err)?:
             print(err)
             break
@@ -22,7 +22,7 @@ class AnyPromiseTests: XCTestCase {
     }
 
     func testPendingResult() {
-        switch AnyPromise(Promise<Int>.pending().promise).result {
+        switch AnyPromise(Promise6<Int>.pending().promise).result {
         case nil:
             break
         default:
@@ -31,8 +31,8 @@ class AnyPromiseTests: XCTestCase {
     }
 
     func testCustomStringConvertible() {
-        XCTAssertEqual("\(AnyPromise(Promise<Int>.pending().promise))", "AnyPromise(…)")
-        XCTAssertEqual("\(AnyPromise(Promise.value(1)))", "AnyPromise(1)")
-        XCTAssertEqual("\(AnyPromise(Promise<Int?>.value(nil)))", "AnyPromise(nil)")
+        XCTAssertEqual("\(AnyPromise(Promise6<Int>.pending().promise))", "AnyPromise(…)")
+        XCTAssertEqual("\(AnyPromise(Promise6.value(1)))", "AnyPromise(1)")
+        XCTAssertEqual("\(AnyPromise(Promise6<Int?>.value(nil)))", "AnyPromise(nil)")
     }
 }

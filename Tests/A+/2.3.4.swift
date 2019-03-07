@@ -14,7 +14,7 @@ class Test234: XCTestCase {
                 }.silenceWarning()
             }
             testRejected { promise, expectation, _ in
-                promise.recover { _ -> Promise<UInt32> in
+                promise.recover { _ -> Promise6<UInt32> in
                     return .value(UInt32(1))
                 }.done { value in
                     XCTAssertEqual(value, 1)
