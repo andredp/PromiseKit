@@ -1,6 +1,6 @@
 import Foundation
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 
 #if os(macOS)
@@ -15,7 +15,7 @@ import PromiseKit
 
     use_frameworks!
     pod "PromiseKit"
- 
+
  And then in your sources:
 
     import PromiseKit
@@ -23,7 +23,7 @@ import PromiseKit
 extension Process {
     /**
      Launches the receiver and resolves when it exits.
-     
+
          let proc = Process()
          proc.launchPath = "/bin/ls"
          proc.arguments = ["/bin"]

@@ -1,6 +1,6 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSFileHandle.h>
-#import <PromiseKit/PromiseKit.h>
+#import <PromiseKit6/PromiseKit6.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSError.h>
 
@@ -8,7 +8,7 @@
 
 #import "NSTask+AnyPromise.h"
 
-@implementation NSTask (PromiseKit)
+@implementation NSTask (PromiseKit6)
 
 - (AnyPromise *)promise {
     return [AnyPromise promiseWithResolverBlock:^(PMKResolver resolve) {
@@ -41,7 +41,7 @@
     #if __clang_major__ >= 9
         if (@available(macOS 10.13, *)) {
             NSError *error = nil;
-            
+
             if (![self launchAndReturnError:&error]) {
                 resolve(error);
             }

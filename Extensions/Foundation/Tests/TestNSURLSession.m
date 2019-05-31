@@ -1,7 +1,7 @@
 @import PMKFoundation;
 @import OHHTTPStubs;
 @import Foundation;
-@import PromiseKit;
+@import PromiseKit6;
 @import XCTest;
 
 @implementation NSURLSessionTests: XCTestCase

@@ -1,6 +1,6 @@
 import Foundation
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 
 /**
@@ -40,7 +40,7 @@ extension URLSession {
          }
 
      We provide a convenience initializer for `String` specifically for this promise:
-     
+
          firstly {
              URLSession.shared.dataTask(.promise, with: rq)
          }.compactMap(String.init).then { string in
@@ -48,9 +48,9 @@ extension URLSession {
          }.then { string in
              print("response: string")
          }
-     
+
      Other common types can be easily decoded using compactMap also:
-     
+
          firstly {
              URLSession.shared.dataTask(.promise, with: rq)
          }.compactMap {
@@ -61,7 +61,7 @@ extension URLSession {
 
      Though if you do decode the image this way, we recommend inflating it on a background thread
      first as this will improve main thread performance when rendering the image:
-     
+
          firstly {
              URLSession.shared.dataTask(.promise, with: rq)
          }.compactMap(on: QoS.userInitiated) { data, _ in
@@ -76,7 +76,7 @@ extension URLSession {
      - Returns: A promise that represents the URL request.
      - SeeAlso: [OMGHTTPURLRQ]
      - Remark: We deliberately don’t provide a `URLRequestConvertible` for `String` because in our experience, you should be explicit with this error path to make good apps.
-     
+
      [OMGHTTPURLRQ]: https://github.com/mxcl/OMGHTTPURLRQ
      */
     public func dataTask(_: PMKNamespacer, with convertible: URLRequestConvertible) -> Promise<(data: Data, response: URLResponse)> {

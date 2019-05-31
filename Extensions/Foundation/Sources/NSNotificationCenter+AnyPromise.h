@@ -1,6 +1,5 @@
 #import <Foundation/NSNotification.h>
-#import <PromiseKit/AnyPromise.h>
-
+#import <PromiseKit6/AnyPromise.h>
 
 /**
  To import the `NSNotificationCenter` category:
@@ -17,7 +16,7 @@
 
     #import <PromiseKit/PromiseKit.h>
 */
-@interface NSNotificationCenter (PromiseKit)
+@interface NSNotificationCenter (PromiseKit6)
 /**
  Observe the named notification once.
 
@@ -30,10 +29,11 @@
         }];
     });
 
- @warning *Important* Promises only resolve once. If you need your block to execute more than once then use `-addObserverForName:object:queue:usingBlock:`.
+ @warning *Important* Promises only resolve once. If you need your block to execute more than once
+ then use `-addObserverForName:object:queue:usingBlock:`.
 
  @param notificationName The name of the notification for which to register the observer.
- 
+
  @return A promise that fulfills with two parameters:
 
    1. The NSNotification object.

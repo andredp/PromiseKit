@@ -1,6 +1,6 @@
 import PMKFoundation
 import Foundation
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class NSNotificationCenterTests: XCTestCase {

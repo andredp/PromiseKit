@@ -4,14 +4,14 @@
 #import "NSURLSession+AnyPromise.h"
 #import <Foundation/NSOperation.h>
 #import <Foundation/NSURLError.h>
-#import <PromiseKit/PromiseKit.h>
+#import <PromiseKit6/PromiseKit6.h>
 #import <CoreFoundation/CFURL.h>
 #import <Foundation/NSThread.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSError.h>
 #import <Foundation/NSURL.h>
 
-@implementation NSURLSession (PromiseKit)
+@implementation NSURLSession (PromiseKit6)
 
 - (AnyPromise *)promiseDataTaskWithRequest:(NSURLRequest *)rq {
     return [AnyPromise promiseWithResolverBlock:^(PMKResolver resolve) {

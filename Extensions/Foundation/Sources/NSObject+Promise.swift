@@ -1,6 +1,6 @@
 import Foundation
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 
 /**
@@ -13,7 +13,7 @@ import PromiseKit
 
     use_frameworks!
     pod "PromiseKit"
- 
+
  And then in your sources:
 
     import PromiseKit

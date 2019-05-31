@@ -1,7 +1,7 @@
 #if TARGET_OS_MAC && !TARGET_OS_EMBEDDED && !TARGET_OS_SIMULATOR
 
 #import <Foundation/NSTask.h>
-#import <PromiseKit/AnyPromise.h>
+#import <PromiseKit6/AnyPromise.h>
 
 #define PMKTaskErrorLaunchPathKey @"PMKTaskErrorLaunchPathKey"
 #define PMKTaskErrorArgumentsKey @"PMKTaskErrorArgumentsKey"
@@ -19,12 +19,12 @@
 
      use_frameworks!
      pod "PromiseKit"
- 
+
  And then in your sources:
 
     #import <PromiseKit/PromiseKit.h>
 */
-@interface NSTask (PromiseKit)
+@interface NSTask (PromiseKit6)
 
 /**
  Launches the receiver and resolves when it exits.
@@ -32,7 +32,7 @@
  If the task fails the promise is rejected with code `PMKTaskError`, and
  `userInfo` keys: `PMKTaskErrorStandardOutputKey`,
  `PMKTaskErrorStandardErrorKey` and `PMKTaskErrorExitStatusKey`.
- 
+
      NSTask *task = [NSTask new];
      task.launchPath = @"/usr/bin/basename";
      task.arguments = @[@"/usr/bin/sleep"];

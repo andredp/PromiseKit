@@ -1,6 +1,6 @@
 import PMKFoundation
 import OHHTTPStubs
-import PromiseKit
+import PromiseKit6
 import XCTest
 
 class NSURLSessionTests: XCTestCase {

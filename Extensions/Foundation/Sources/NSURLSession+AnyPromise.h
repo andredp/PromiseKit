@@ -1,7 +1,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSURLSession.h>
 #import <Foundation/NSURLRequest.h>
-#import <PromiseKit/AnyPromise.h>
+#import <PromiseKit6/AnyPromise.h>
 
 #define PMKURLErrorFailingURLResponseKey @"PMKURLErrorFailingURLResponseKey"
 #define PMKURLErrorFailingDataKey @"PMKURLErrorFailingDataKey"
@@ -31,12 +31,12 @@
 
     use_frameworks!
     pod "PromiseKit"
- 
+
  And then in your sources:
 
     #import <PromiseKit/PromiseKit.h>
 */
-@interface NSURLSession (PromiseKit)
+@interface NSURLSession (PromiseKit6)
 
 /**
  Creates a task that retrieves the contents of a URL based on the

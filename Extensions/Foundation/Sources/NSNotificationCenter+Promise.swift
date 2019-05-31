@@ -1,6 +1,6 @@
 import Foundation
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 
 /**
