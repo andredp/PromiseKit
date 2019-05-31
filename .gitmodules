@@ -1,9 +1,3 @@
-[submodule "Extensions/Foundation"]
-	path = Extensions/Foundation
-	url = https://github.com/PromiseKit/Foundation.git
-[submodule "Extensions/UIKit"]
-	path = Extensions/UIKit
-	url = https://github.com/PromiseKit/UIKit.git
 [submodule "Extensions/Accounts"]
 	path = Extensions/Accounts
 	url = https://github.com/PromiseKit/Accounts.git
