@@ -3,8 +3,7 @@
   "version": "6.9.0",
   "source": {
     "git": "https://github.com/andredp/PromiseKit6.git",
-    "tag": "6.9.0",
-    "submodules": true
+    "tag": "6.9.0"
   },
   "license": "MIT",
   "summary": "Promises for Swift & ObjC.",

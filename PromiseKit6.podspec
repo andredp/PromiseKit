@@ -5,8 +5,7 @@ Pod::Spec.new do |s|
 
   s.source = {
     :git => "https://github.com/andredp/#{s.name}.git",
-    :tag => s.version,
-    :submodules => true
+    :tag => s.version
   }
 
   s.license = 'MIT'

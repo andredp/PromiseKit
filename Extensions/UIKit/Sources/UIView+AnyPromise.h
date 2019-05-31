@@ -1,4 +1,4 @@
-#import <PromiseKit/AnyPromise.h>
+#import <PromiseKit6/AnyPromise.h>
 #import <UIKit/UIView.h>
 
 //  Created by Masafumi Yoshida on 2014/07/11.
@@ -8,23 +8,23 @@
  To import the `UIView` category:
 
     use_frameworks!
-    pod "PromiseKit/UIKit"
+    pod "PromiseKit6/UIKit"
 
  Or `UIKit` is one of the categories imported by the umbrella pod:
 
     use_frameworks!
-    pod "PromiseKit"
- 
+    pod "PromiseKit6"
+
  And then in your sources:
 
-    @import PromiseKit;
+    @import PromiseKit6;
 */
-@interface UIView (PromiseKit)
+@interface UIView (PromiseKit6)
 
 /**
  Animate changes to one or more views using the specified duration.
 
- @param duration The total duration of the animations, measured in 
+ @param duration The total duration of the animations, measured in
  seconds. If you specify a negative value or 0, the changes are made
  without animating them.
 
@@ -34,12 +34,13 @@
  @return A promise that fulfills with a boolean NSNumber indicating
  whether or not the animations actually finished.
 */
-+ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
++ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration
+                         animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
 
 /**
  Animate changes to one or more views using the specified duration, delay,
  options, and completion handler.
- 
+
  @param duration The total duration of the animations, measured in
  seconds. If you specify a negative value or 0, the changes are made
  without animating them.
@@ -47,7 +48,7 @@
  @param delay The amount of time (measured in seconds) to wait before
  beginning the animations. Specify a value of 0 to begin the animations
  immediately.
- 
+
  @param options A mask of options indicating how you want to perform the
  animations. For a list of valid constants, see UIViewAnimationOptions.
 
@@ -57,7 +58,10 @@
  @return A promise that fulfills with a boolean NSNumber indicating
  whether or not the animations actually finished.
 */
-+ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
++ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration
+                              delay:(NSTimeInterval)delay
+                            options:(UIViewAnimationOptions)options
+                         animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
 
 /**
  Performs a view animation using a timing curve corresponding to the
@@ -66,7 +70,12 @@
  @return A promise that fulfills with a boolean NSNumber indicating
  whether or not the animations actually finished.
 */
-+ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
++ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration
+                              delay:(NSTimeInterval)delay
+             usingSpringWithDamping:(CGFloat)dampingRatio
+              initialSpringVelocity:(CGFloat)velocity
+                            options:(UIViewAnimationOptions)options
+                         animations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
 
 /**
  Creates an animation block object that can be used to set up
@@ -75,6 +84,9 @@
  @return A promise that fulfills with a boolean NSNumber indicating
  whether or not the animations actually finished.
 */
-+ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewKeyframeAnimationOptions)options keyframeAnimations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
++ (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration
+                              delay:(NSTimeInterval)delay
+                            options:(UIViewKeyframeAnimationOptions)options
+                 keyframeAnimations:(void (^)(void))animations NS_REFINED_FOR_SWIFT;
 
 @end

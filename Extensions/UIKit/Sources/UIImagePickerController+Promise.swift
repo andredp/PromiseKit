@@ -1,5 +1,5 @@
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 import UIKit
 
@@ -63,7 +63,7 @@ extension UIViewController {
 }
 
 extension UIImagePickerController {
-    /// Errors representing PromiseKit UIImagePickerController failures
+    /// Errors representing PromiseKit6 UIImagePickerController failures
     public enum PMKError: CancellableError {
         /// The user cancelled the UIImagePickerController.
         case cancelled

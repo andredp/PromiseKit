@@ -1,6 +1,6 @@
 #import <UIKit/UINavigationController.h>
 #import "UIViewController+AnyPromise.h"
-#import <PromiseKit/PromiseKit.h>
+#import <PromiseKit6/PromiseKit6.h>
 
 #if PMKImagePickerController
 #import <UIKit/UIImagePickerController.h>
@@ -17,7 +17,7 @@
 - (AnyPromise*) promise;
 @end
 
-@implementation UIViewController (PromiseKit)
+@implementation UIViewController (PromiseKit6)
 
 - (AnyPromise *)promiseViewController:(UIViewController *)vc animated:(BOOL)animated completion:(void (^)(void))block {
     __kindof UIViewController *vc2present = vc;

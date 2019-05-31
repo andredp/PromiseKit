@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 DeNA. All rights reserved.
 //
 
-#import <PromiseKit/PromiseKit.h>
+#import <PromiseKit6/PromiseKit6.h>
 #import "UIView+AnyPromise.h"
 
 
@@ -22,7 +22,7 @@
     AnyPromise *promise = [[AnyPromise alloc] initWithResolver:&resolve];
 
 
-@implementation UIView (PromiseKit)
+@implementation UIView (PromiseKit6)
 
 + (AnyPromise *)promiseWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations {
     return [self promiseWithDuration:duration delay:0 options:0 animations:animations];

@@ -1,22 +1,22 @@
 import UIKit.UIView
 #if !PMKCocoaPods
-import PromiseKit
+import PromiseKit6
 #endif
 
 /**
  To import the `UIView` category:
 
     use_frameworks!
-    pod "PromiseKit/UIKit"
+    pod "PromiseKit6/UIKit"
 
  Or `UIKit` is one of the categories imported by the umbrella pod:
 
     use_frameworks!
-    pod "PromiseKit"
+    pod "PromiseKit6"
 
  And then in your sources:
 
-    import PromiseKit
+    import PromiseKit6
 */
 public extension UIView {
 #if swift(>=4.2)
@@ -69,7 +69,7 @@ public extension UIView {
     /**
      Animate changes to one or more views using the specified duration, delay,
      options, and completion handler.
-     
+
      - Parameter duration: The total duration of the animations, measured in
      seconds. If you specify a negative value or 0, the changes are made
      without animating them.
@@ -77,7 +77,7 @@ public extension UIView {
      - Parameter delay: The amount of time (measured in seconds) to wait before
      beginning the animations. Specify a value of 0 to begin the animations
      immediately.
-     
+
      - Parameter options: A mask of options indicating how you want to perform the
      animations. For a list of valid constants, see UIViewAnimationOptions.
 
@@ -96,12 +96,12 @@ public extension UIView {
     static func animate(_: PMKNamespacer, duration: TimeInterval, delay: TimeInterval, usingSpringWithDamping damping: CGFloat, initialSpringVelocity: CGFloat, options: UIViewAnimationOptions = [], animations: @escaping () -> Void) -> Guarantee<Bool> {
         return Guarantee { animate(withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: initialSpringVelocity, options: options, animations: animations, completion: $0) }
     }
-    
+
     @discardableResult
     static func transition(_: PMKNamespacer, with view: UIView, duration: TimeInterval, options: UIViewAnimationOptions = [], animations: (() -> Void)?) -> Guarantee<Bool> {
         return Guarantee { transition(with: view, duration: duration, options: options, animations: animations, completion: $0) }
     }
-               
+
     @discardableResult
     static func transition(_: PMKNamespacer, from: UIView, to: UIView, duration: TimeInterval, options: UIViewAnimationOptions = []) -> Guarantee<Bool> {
         return Guarantee { transition(from: from, to: to, duration: duration, options: options, completion: $0) }
