@@ -1,6 +1,6 @@
 #!/usr/bin/swift sh
 import Foundation
-import PromiseKit  // @mxcl ~> 6.5 
+import PromiseKit6  // @mxcl ~> 6.5
 import Swifter     // @mattdonnelly == b27a89
 let swifter = Swifter(
 	consumerKey: "FILL",
@@ -64,7 +64,7 @@ func deleteFavorites(maxID: String? = nil) -> Promise<Void> {
                     print("D❤️:", item["text"].string!)
                 }, failure: seal.reject)
             }
-            
+
             let next = json.array!.last!["id_str"].string!
             deleteFavorites(maxID: next).pipe(to: seal.resolve)
 

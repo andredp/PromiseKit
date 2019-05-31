@@ -1,0 +1,148 @@
+{
+  "name": "PromiseKit6",
+  "version": "6.9.0",
+  "source": {
+    "git": "https://github.com/andredp/PromiseKit6.git",
+    "tag": "6.9.0",
+    "submodules": true
+  },
+  "license": "MIT",
+  "summary": "Promises for Swift & ObjC.",
+  "homepage": "http://mxcl.dev/PromiseKit/",
+  "description": "A thoughtful and complete implementation of promises for iOS, macOS, watchOS and tvOS with first-class support for both Objective-C and Swift.",
+  "social_media_url": "https://twitter.com/mxcl",
+  "authors": {
+    "Max Howell": "mxcl@me.com"
+  },
+  "documentation_url": "http://mxcl.dev/PromiseKit/reference/v6/Classes/Promise.html",
+  "default_subspecs": ["CorePromise", "UIKit", "Foundation"],
+  "requires_arc": true,
+  "swift_versions": [
+    "3.1",
+    "3.2",
+    "3.3",
+    "3.4",
+    "4.0",
+    "4.1",
+    "4.2",
+    "4.3",
+    "4.4",
+    "5.0"
+  ],
+  "platforms": {
+    "ios": "8.0",
+    "osx": "10.10",
+    "watchos": "2.0",
+    "tvos": "9.0"
+  },
+  "pod_target_xcconfig": {
+    "OTHER_SWIFT_FLAGS": "-DPMKCocoaPods"
+  },
+  "subspecs": [
+    {
+      "name": "CorePromise",
+      "source_files": [
+        "Sources/when.swift",
+        "Sources/Guarantee.swift",
+        "Sources/race.swift",
+        "Sources/Error.swift",
+        "Sources/after.swift",
+        "Sources/Resolver.swift",
+        "Sources/Deprecations.swift",
+        "Sources/hang.swift",
+        "Sources/Box.swift",
+        "Sources/Catchable.swift",
+        "Sources/LogEvent.swift",
+        "Sources/Promise.swift",
+        "Sources/AnyPromise.swift",
+        "Sources/firstly.swift",
+        "Sources/CustomStringConvertible.swift",
+        "Sources/Thenable.swift",
+        "Sources/Configuration.swift",
+        "Sources/{after,AnyPromise,GlobalState,dispatch_promise,hang,join,PMKPromise,when,race}.m",
+        "Sources/fwd.h",
+        "Sources/AnyPromise.h",
+        "Sources/PromiseKit6.h"
+      ],
+      "public_header_files": [
+        "Sources/fwd.h",
+        "Sources/AnyPromise.h",
+        "Sources/PromiseKit6.h"
+      ],
+      "preserve_paths": [
+        "Sources/AnyPromise+Private.h",
+        "Sources/PMKCallVariadicBlock.m",
+        "Sources/NSMethodSignatureForBlock.m"
+      ],
+      "frameworks": "Foundation",
+      "platforms": {
+        "ios": "8.0",
+        "osx": "10.10",
+        "watchos": "2.0",
+        "tvos": "9.0"
+      }
+    },
+    {
+      "name": "Foundation",
+      "source_files": [
+        "Extensions/Foundation/Sources/NSURLSession+AnyPromise.h",
+        "Extensions/Foundation/Sources/NSNotificationCenter+Promise.swift",
+        "Extensions/Foundation/Sources/NSNotificationCenter+AnyPromise.m",
+        "Extensions/Foundation/Sources/afterlife.swift",
+        "Extensions/Foundation/Sources/NSTask+AnyPromise.h",
+        "Extensions/Foundation/Sources/NSURLSession+Promise.swift",
+        "Extensions/Foundation/Sources/NSURLSession+AnyPromise.m",
+        "Extensions/Foundation/Sources/NSObject+Promise.swift",
+        "Extensions/Foundation/Sources/NSNotificationCenter+AnyPromise.h",
+        "Extensions/Foundation/Sources/PMKFoundation.h",
+        "Extensions/Foundation/Sources/Process+Promise.swift",
+        "Extensions/Foundation/Sources/NSTask+AnyPromise.m"
+      ],
+      "dependencies": {
+        "PromiseKit6/CorePromise": []
+      },
+      "frameworks": "Foundation",
+      "platforms": {
+        "ios": "8.0",
+        "osx": "10.10",
+        "watchos": "2.0",
+        "tvos": "9.0"
+      }
+    },
+    {
+      "name": "UIKit",
+      "tvos": {
+        "source_files": [
+          "Extensions/UIKit/Sources/UIViewController+AnyPromise.m",
+          "Extensions/UIKit/Sources/PMKUIKit.h",
+          "Extensions/UIKit/Sources/UIView+AnyPromise.h",
+          "Extensions/UIKit/Sources/UIView+Promise.swift",
+          "Extensions/UIKit/Sources/UIViewController+AnyPromise.h",
+          "Extensions/UIKit/Sources/UIView+AnyPromise.m",
+          "Extensions/UIKit/Sources/UIViewPropertyAnimator+Promise.swift"
+        ],
+        "frameworks": "UIKit"
+      },
+      "ios": {
+        "source_files": [
+          "Extensions/UIKit/Sources/UIViewController+AnyPromise.m",
+          "Extensions/UIKit/Sources/PMKUIKit.h",
+          "Extensions/UIKit/Sources/UIView+AnyPromise.h",
+          "Extensions/UIKit/Sources/UIView+Promise.swift",
+          "Extensions/UIKit/Sources/UIViewController+AnyPromise.h",
+          "Extensions/UIKit/Sources/UIView+AnyPromise.m",
+          "Extensions/UIKit/Sources/UIViewPropertyAnimator+Promise.swift"
+        ],
+        "frameworks": "UIKit"
+      },
+      "dependencies": {
+        "PromiseKit6/CorePromise": []
+      },
+      "platforms": {
+        "ios": "8.0",
+        "tvos": "9.0"
+      }
+    }
+  ],
+  "swift_version": "5.0"
+}

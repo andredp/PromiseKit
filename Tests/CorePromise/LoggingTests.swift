@@ -1,24 +1,24 @@
-@testable import PromiseKit
+@testable import PromiseKit6
 import Dispatch
 import XCTest
 
 class LoggingTests: XCTestCase {
     /**
      The test should emit the following log messages:
-     
+
      PromiseKit: warning: `wait()` called on main thread!
      PromiseKit: warning: pending promise deallocated
      PromiseKit:cauterized-error: purposes
      This is an error message
     */
     func testLogging() {
-        
+
         var logOutput: String? = nil
-        
+
         enum ForTesting: Error {
             case purposes
         }
-        
+
         // Test Logging to Console, the default behavior
         conf.logHandler(.waitOnMainThread)
         conf.logHandler(.pendingPromiseDeallocated)
@@ -55,11 +55,11 @@ class LoggingTests: XCTestCase {
 
     // Verify waiting on main thread in Promise is logged
     func testPromiseWaitOnMainThreadLogged() throws {
-        
+
         enum ForTesting: Error {
             case purposes
         }
-        
+
         var logOutput: String? = nil
         conf.logHandler = { event in
             logOutput = "\(event)"
@@ -73,10 +73,10 @@ class LoggingTests: XCTestCase {
         XCTAssertEqual("PromiseFulfilled", promisedString)
         XCTAssertEqual(logOutput!, "waitOnMainThread")
     }
-    
+
     // Verify Promise.cauterize() is logged
     func testCauterizeIsLogged() {
-        
+
         enum ForTesting: Error {
             case purposes
         }
@@ -94,7 +94,7 @@ class LoggingTests: XCTestCase {
         }
         func createPromise() -> Promise<String> {
             let promiseResolver = Promise<String>.pending()
-            
+
             let queue = DispatchQueue(label: "workQueue")
             queue.async {
                 promiseResolver.resolver.reject(ForTesting.purposes)
@@ -128,11 +128,11 @@ class LoggingTests: XCTestCase {
 
     // Verify waiting on main thread in Guarantee is logged
     func testGuaranteeWaitOnMainThreadLogged() {
-        
+
         enum ForTesting: Error {
             case purposes
         }
-        
+
         var logOutput: String? = nil
         conf.logHandler = { event in
             switch event {
@@ -153,10 +153,10 @@ class LoggingTests: XCTestCase {
         XCTAssertEqual("GuaranteeFulfilled", guaranteedString)
         XCTAssertEqual(logOutput!, "waitOnMainThread")
     }
-    
+
     // Verify pendingPromiseDeallocated is logged
     func testPendingPromiseDeallocatedIsLogged() {
-        
+
         var logOutput: String? = nil
         conf.logHandler = { event in
             switch event {
@@ -173,12 +173,12 @@ class LoggingTests: XCTestCase {
         }
         XCTAssertEqual ("pendingPromiseDeallocated", logOutput!)
     }
-    
+
     // Verify pendingGuaranteeDeallocated is logged
     func testPendingGuaranteeDeallocatedIsLogged() {
-        
+
         var logOutput: String? = nil
-        let loggingClosure: (PromiseKit.LogEvent) -> () = { event in
+        let loggingClosure: (PromiseKit6.LogEvent) -> () = { event in
             switch event {
             case .waitOnMainThread, .pendingPromiseDeallocated, .pendingGuaranteeDeallocated:
                 logOutput = "\(event)"
@@ -194,6 +194,6 @@ class LoggingTests: XCTestCase {
         }
         XCTAssertEqual ("pendingGuaranteeDeallocated", logOutput!)
     }
-    
+
     //TODO Verify pending promise deallocation is logged
 }

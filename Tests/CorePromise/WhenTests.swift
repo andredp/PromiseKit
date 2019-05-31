@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import Dispatch
 import XCTest
 
@@ -108,7 +108,7 @@ class WhenTests: XCTestCase {
 
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
     func testRejected() {
         enum Error: Swift.Error { case dummy }
 
@@ -116,11 +116,11 @@ class WhenTests: XCTestCase {
         let p1 = after(.milliseconds(100)).map{ true }
         let p2: Promise<Bool> = after(.milliseconds(200)).map{ throw Error.dummy }
         let p3 = Promise.value(false)
-            
+
         when(fulfilled: p1, p2, p3).catch { _ in
             e1.fulfill()
         }
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
 
@@ -143,7 +143,7 @@ class WhenTests: XCTestCase {
         }.silenceWarning()
 
         progress.resignCurrent()
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
 

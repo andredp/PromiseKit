@@ -1,4 +1,4 @@
-import PromiseKit
+import PromiseKit6
 import Dispatch
 import XCTest
 
@@ -12,7 +12,7 @@ private let timeout: TimeInterval = 10
 extension XCTestCase {
     func describe(_ description: String, file: StaticString = #file, line: UInt = #line, body: () throws -> Void) {
 
-        PromiseKit.conf.Q.map = .main
+        PromiseKit6.conf.Q.map = .main
 
         do {
             try body()
@@ -106,9 +106,9 @@ extension XCTestCase {
                 self.expectation(description: "\(desc) (\($0))")
             }
             body(promise, expectations, value)
-            
+
             executeAfter()
-            
+
             self.waitForExpectations(timeout: timeout) { err in
                 if let _ = err {
                     XCTFail("timed out: \(desc)", file: file, line: line)

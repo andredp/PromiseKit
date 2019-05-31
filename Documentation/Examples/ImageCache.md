@@ -5,7 +5,7 @@ state machine:
 
 ```swift
 import Foundation
-import PromiseKit
+import PromiseKit6
 
 /**
  * Small (10 images)
